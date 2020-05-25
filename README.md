@@ -1,3 +1,3 @@
-# Strapi application
+# KSRTC API
 
-A quick description of your strapi application
+The API to access the KSRTC db.
