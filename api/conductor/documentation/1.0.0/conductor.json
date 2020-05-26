@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/trips": {
+    "/conductors": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Trip"
+                    "$ref": "#/components/schemas/Conductor"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Trip"
+          "Conductor"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Trip"
+                  "$ref": "#/components/schemas/Conductor"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Trip"
+          "Conductor"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewTrip"
+                "$ref": "#/components/schemas/NewConductor"
               }
             }
           }
         }
       }
     },
-    "/trips/count": {
+    "/conductors/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Trip"
+          "Conductor"
         ],
         "parameters": []
       }
     },
-    "/trips/{id}": {
+    "/conductors/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Trip"
+                  "$ref": "#/components/schemas/Conductor"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Trip"
+          "Conductor"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Trip"
+                  "$ref": "#/components/schemas/Conductor"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Trip"
+          "Conductor"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewTrip"
+                "$ref": "#/components/schemas/NewConductor"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Trip"
+          "Conductor"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Trip": {
+      "Conductor": {
         "required": [
           "id"
         ],
@@ -522,113 +522,13 @@
           "id": {
             "type": "string"
           },
-          "from": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "lat": {
-                "type": "number"
-              },
-              "long": {
-                "type": "number"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "trips": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            }
-          },
-          "to": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "lat": {
-                "type": "number"
-              },
-              "long": {
-                "type": "number"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "trips": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            }
-          },
-          "via": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "lat": {
-                "type": "number"
-              },
-              "long": {
-                "type": "number"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "trips": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            }
-          },
-          "start_time": {
-            "type": "datetime"
-          },
-          "end_time": {
-            "type": "datetime"
-          },
-          "status": {
+          "emp_id": {
             "type": "string"
           },
-          "bus": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "passenger_count": {
-                "type": "integer"
-              },
-              "bus_number": {
-                "type": "string"
-              },
-              "trip": {
-                "type": "string"
-              }
-            }
-          },
-          "type": {
+          "phone": {
             "type": "string"
           },
-          "conductor": {
+          "trip": {
             "required": [
               "id"
             ],
@@ -636,59 +536,53 @@
               "id": {
                 "type": "string"
               },
-              "emp_id": {
+              "from": {
                 "type": "string"
               },
-              "phone": {
+              "to": {
                 "type": "string"
               },
-              "trip": {
+              "via": {
                 "type": "string"
+              },
+              "start_time": {
+                "type": "datetime"
+              },
+              "end_time": {
+                "type": "datetime"
+              },
+              "status": {
+                "type": "string"
+              },
+              "bus": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "conductor": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
               }
             }
-          },
-          "lat": {
-            "type": "number"
-          },
-          "long": {
-            "type": "number"
           }
         }
       },
-      "NewTrip": {
+      "NewConductor": {
         "properties": {
-          "from": {
+          "emp_id": {
             "type": "string"
           },
-          "to": {
+          "phone": {
             "type": "string"
           },
-          "via": {
+          "trip": {
             "type": "string"
-          },
-          "start_time": {
-            "type": "datetime"
-          },
-          "end_time": {
-            "type": "datetime"
-          },
-          "status": {
-            "type": "string"
-          },
-          "bus": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "conductor": {
-            "type": "string"
-          },
-          "lat": {
-            "type": "number"
-          },
-          "long": {
-            "type": "number"
           }
         }
       }
@@ -696,7 +590,7 @@
   },
   "tags": [
     {
-      "name": "Trip"
+      "name": "Conductor"
     }
   ]
 }

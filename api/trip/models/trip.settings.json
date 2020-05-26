@@ -29,6 +29,20 @@
     },
     "bus": {
       "model": "bus"
+    },
+    "type": {
+      "type": "string"
+    },
+    "conductor": {
+      "columnName": "Conductor",
+      "model": "conductor",
+      "via": "trip"
+    },
+    "lat": {
+      "type": "float"
+    },
+    "long": {
+      "type": "float"
     }
   }
 }

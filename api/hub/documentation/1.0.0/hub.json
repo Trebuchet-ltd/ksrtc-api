@@ -559,6 +559,18 @@
               },
               "bus": {
                 "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "conductor": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
               }
             }
           },

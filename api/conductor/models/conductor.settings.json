@@ -1,22 +1,23 @@
 {
   "kind": "collectionType",
-  "collectionName": "buses",
+  "collectionName": "conductors",
   "info": {
-    "name": "Bus"
+    "name": "Conductor"
   },
   "options": {
     "increments": true,
     "timestamps": true
   },
   "attributes": {
-    "passenger_count": {
-      "type": "integer",
-      "default": 0
+    "emp_id": {
+      "type": "string"
     },
-    "bus_number": {
+    "phone": {
       "type": "string"
     },
     "trip": {
+      "via": "conductor",
+      "columnName": "Trip",
       "model": "trip"
     }
   }

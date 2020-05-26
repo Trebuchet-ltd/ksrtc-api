@@ -522,12 +522,6 @@
           "id": {
             "type": "string"
           },
-          "lat": {
-            "type": "number"
-          },
-          "long": {
-            "type": "number"
-          },
           "passenger_count": {
             "type": "integer",
             "default": 0
@@ -563,6 +557,18 @@
               },
               "bus": {
                 "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "conductor": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
               }
             }
           }
@@ -570,12 +576,6 @@
       },
       "NewBus": {
         "properties": {
-          "lat": {
-            "type": "number"
-          },
-          "long": {
-            "type": "number"
-          },
           "passenger_count": {
             "type": "integer",
             "default": 0
