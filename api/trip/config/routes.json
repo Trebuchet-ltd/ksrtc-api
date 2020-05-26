@@ -2,6 +2,14 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/trips/near",
+      "handler": "trip.near",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/trips",
       "handler": "trip.find",
       "config": {
