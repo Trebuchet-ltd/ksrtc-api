@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hubs",
+  "info": {
+    "name": "Hub"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "lat": {
+      "type": "float"
+    },
+    "long": {
+      "type": "float"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "trips": {
+      "collection": "trip"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

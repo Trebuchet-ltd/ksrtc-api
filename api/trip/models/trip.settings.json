@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "trips",
+  "info": {
+    "name": "Trip"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "from": {
+      "model": "hub"
+    },
+    "to": {
+      "model": "hub"
+    },
+    "via": {
+      "model": "hub"
+    },
+    "start_time": {
+      "type": "datetime"
+    },
+    "end_time": {
+      "type": "datetime"
+    },
+    "status": {
+      "type": "string"
+    },
+    "bus": {
+      "model": "bus"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "buses",
+  "info": {
+    "name": "Bus"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "lat": {
+      "type": "float"
+    },
+    "long": {
+      "type": "float"
+    },
+    "passenger_count": {
+      "type": "integer",
+      "default": 0
+    },
+    "bus_number": {
+      "type": "string"
+    },
+    "trip": {
+      "model": "trip"
+    }
+  }
+}
