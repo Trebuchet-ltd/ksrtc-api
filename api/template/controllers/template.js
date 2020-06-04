@@ -8,6 +8,32 @@ const { sanitizeEntity } = require('strapi-utils');
 
 module.exports = {
 
+      /**
+   * Retrieve a deeply populated record.
+   *
+   * @return {Object}
+   */
+
+  async getOneDeep(ctx) {
+    const { id } = ctx.params;
+
+    const entity = await strapi.services.template.findOne({ id }, {
+        path: 'route',
+        populate: [{
+            path: 'stops'
+        },
+        {
+            path: 'from'
+        },
+        {
+            path: 'to'
+        }
+        ]
+    });
+    return sanitizeEntity(entity, { model: strapi.models.template });
+  },
+
+
     /**
  * Retrieve records.
  *

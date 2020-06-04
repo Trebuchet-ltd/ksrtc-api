@@ -18,6 +18,14 @@
     },
     {
       "method": "GET",
+      "path": "/templates/:id/getDeep",
+      "handler": "template.getOneDeep",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/templates/count",
       "handler": "template.count",
       "config": {
