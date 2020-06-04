@@ -10,6 +10,14 @@
     },
     {
       "method": "GET",
+      "path": "/templates/getDeep",
+      "handler": "template.getDeep",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/templates/count",
       "handler": "template.count",
       "config": {
