@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/04/2020 8:10:58 PM"
+    "x-generation-date": "06/04/2020 6:02:45 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6164,6 +6164,12 @@
               },
               "next_stop": {
                 "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
               }
             }
           }
@@ -6229,6 +6235,12 @@
                 "type": "string"
               },
               "next_stop": {
+                "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "to": {
                 "type": "string"
               }
             }
@@ -6304,6 +6316,12 @@
                 "type": "string"
               },
               "next_stop": {
+                "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "to": {
                 "type": "string"
               }
             }
@@ -6384,6 +6402,12 @@
                 "type": "string"
               },
               "next_stop": {
+                "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "to": {
                 "type": "string"
               }
             }
@@ -6694,6 +6718,12 @@
                 "type": "boolean"
               }
             }
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
           }
         }
       },
@@ -6727,6 +6757,12 @@
             "type": "string"
           },
           "next_stop": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
             "type": "string"
           }
         }

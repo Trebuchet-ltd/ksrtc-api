@@ -565,6 +565,12 @@
               },
               "next_stop": {
                 "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
               }
             }
           }

@@ -40,6 +40,12 @@
     },
     "next_stop": {
       "model": "hub"
+    },
+    "from": {
+      "type": "string"
+    },
+    "to": {
+      "type": "string"
     }
   }
 }
