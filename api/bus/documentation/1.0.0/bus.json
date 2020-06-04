@@ -537,15 +537,6 @@
               "id": {
                 "type": "string"
               },
-              "from": {
-                "type": "string"
-              },
-              "to": {
-                "type": "string"
-              },
-              "via": {
-                "type": "string"
-              },
               "start_time": {
                 "type": "datetime"
               },
@@ -569,6 +560,9 @@
               },
               "long": {
                 "type": "number"
+              },
+              "route": {
+                "type": "string"
               }
             }
           }

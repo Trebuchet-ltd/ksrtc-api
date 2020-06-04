@@ -23,6 +23,10 @@
     },
     "name": {
       "type": "string"
+    },
+    "is_hub": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

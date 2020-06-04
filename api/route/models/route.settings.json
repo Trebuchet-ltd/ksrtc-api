@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "routes",
+  "info": {
+    "name": "Route"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "from": {
+      "model": "hub"
+    },
+    "to": {
+      "model": "hub"
+    },
+    "stops": {
+      "collection": "hub"
+    }
+  }
+}

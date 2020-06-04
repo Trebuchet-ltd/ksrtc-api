@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/conductors": {
+    "/templates": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Conductor"
+                    "$ref": "#/components/schemas/Template"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Template"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Conductor"
+                  "$ref": "#/components/schemas/Template"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Template"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewConductor"
+                "$ref": "#/components/schemas/NewTemplate"
               }
             }
           }
         }
       }
     },
-    "/conductors/count": {
+    "/templates/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Template"
         ],
         "parameters": []
       }
     },
-    "/conductors/{id}": {
+    "/templates/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Conductor"
+                  "$ref": "#/components/schemas/Template"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Template"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Conductor"
+                  "$ref": "#/components/schemas/Template"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Template"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewConductor"
+                "$ref": "#/components/schemas/NewTemplate"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Template"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Conductor": {
+      "Template": {
         "required": [
           "id"
         ],
@@ -522,13 +522,7 @@
           "id": {
             "type": "string"
           },
-          "emp_id": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "trip": {
+          "route": {
             "required": [
               "id"
             ],
@@ -536,47 +530,49 @@
               "id": {
                 "type": "string"
               },
-              "start_time": {
-                "type": "datetime"
-              },
-              "end_time": {
-                "type": "datetime"
-              },
-              "status": {
+              "from": {
                 "type": "string"
               },
-              "bus": {
+              "to": {
                 "type": "string"
               },
-              "type": {
-                "type": "string"
-              },
-              "conductor": {
-                "type": "string"
-              },
-              "lat": {
-                "type": "number"
-              },
-              "long": {
-                "type": "number"
-              },
-              "route": {
+              "stops": {
                 "type": "string"
               }
             }
+          },
+          "startTime": {
+            "type": "time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "SF",
+              "ORD",
+              "LSFP",
+              "LS",
+              "FP"
+            ]
           }
         }
       },
-      "NewConductor": {
+      "NewTemplate": {
         "properties": {
-          "emp_id": {
+          "route": {
             "type": "string"
           },
-          "phone": {
-            "type": "string"
+          "startTime": {
+            "type": "time"
           },
-          "trip": {
-            "type": "string"
+          "type": {
+            "type": "string",
+            "enum": [
+              "SF",
+              "ORD",
+              "LSFP",
+              "LS",
+              "FP"
+            ]
           }
         }
       }
@@ -584,7 +580,7 @@
   },
   "tags": [
     {
-      "name": "Conductor"
+      "name": "Template"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/conductors": {
+    "/routes": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Conductor"
+                    "$ref": "#/components/schemas/Route"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Route"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Conductor"
+                  "$ref": "#/components/schemas/Route"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Route"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewConductor"
+                "$ref": "#/components/schemas/NewRoute"
               }
             }
           }
         }
       }
     },
-    "/conductors/count": {
+    "/routes/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Route"
         ],
         "parameters": []
       }
     },
-    "/conductors/{id}": {
+    "/routes/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Conductor"
+                  "$ref": "#/components/schemas/Route"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Route"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Conductor"
+                  "$ref": "#/components/schemas/Route"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Route"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewConductor"
+                "$ref": "#/components/schemas/NewRoute"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Conductor"
+          "Route"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Conductor": {
+      "Route": {
         "required": [
           "id"
         ],
@@ -522,36 +522,12 @@
           "id": {
             "type": "string"
           },
-          "emp_id": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "trip": {
+          "from": {
             "required": [
               "id"
             ],
             "properties": {
               "id": {
-                "type": "string"
-              },
-              "start_time": {
-                "type": "datetime"
-              },
-              "end_time": {
-                "type": "datetime"
-              },
-              "status": {
-                "type": "string"
-              },
-              "bus": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              },
-              "conductor": {
                 "type": "string"
               },
               "lat": {
@@ -560,22 +536,87 @@
               "long": {
                 "type": "number"
               },
-              "route": {
+              "phone": {
                 "type": "string"
+              },
+              "trips": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "is_hub": {
+                "type": "boolean"
+              }
+            }
+          },
+          "to": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "trips": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "is_hub": {
+                "type": "boolean"
+              }
+            }
+          },
+          "stops": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "trips": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "is_hub": {
+                "type": "boolean"
               }
             }
           }
         }
       },
-      "NewConductor": {
+      "NewRoute": {
         "properties": {
-          "emp_id": {
+          "from": {
             "type": "string"
           },
-          "phone": {
+          "to": {
             "type": "string"
           },
-          "trip": {
+          "stops": {
             "type": "string"
           }
         }
@@ -584,7 +625,7 @@
   },
   "tags": [
     {
-      "name": "Conductor"
+      "name": "Route"
     }
   ]
 }

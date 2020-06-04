@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "templates",
+  "info": {
+    "name": "Template"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "route": {
+      "model": "route"
+    },
+    "startTime": {
+      "type": "time"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "SF",
+        "ORD",
+        "LSFP",
+        "LS",
+        "FP"
+      ]
+    }
+  }
+}

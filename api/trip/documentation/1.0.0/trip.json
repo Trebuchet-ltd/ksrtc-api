@@ -579,81 +579,6 @@
           "id": {
             "type": "string"
           },
-          "from": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "lat": {
-                "type": "number"
-              },
-              "long": {
-                "type": "number"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "trips": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            }
-          },
-          "to": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "lat": {
-                "type": "number"
-              },
-              "long": {
-                "type": "number"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "trips": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            }
-          },
-          "via": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "lat": {
-                "type": "number"
-              },
-              "long": {
-                "type": "number"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "trips": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            }
-          },
           "start_time": {
             "type": "datetime"
           },
@@ -709,20 +634,30 @@
           },
           "long": {
             "type": "number"
+          },
+          "route": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
+              },
+              "stops": {
+                "type": "string"
+              }
+            }
           }
         }
       },
       "NewTrip": {
         "properties": {
-          "from": {
-            "type": "string"
-          },
-          "to": {
-            "type": "string"
-          },
-          "via": {
-            "type": "string"
-          },
           "start_time": {
             "type": "datetime"
           },
@@ -746,6 +681,9 @@
           },
           "long": {
             "type": "number"
+          },
+          "route": {
+            "type": "string"
           }
         }
       }
