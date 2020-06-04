@@ -4,7 +4,7 @@
     "default": {
       "connector": "mongoose",
       "settings": {
-        "database": "ksrtc",
+        "database": "ksrtc_dev",
         "host": "${process.env.MONGO_HOST || '0.0.0.0'}",
         "srv": false,
         "port": 27017,

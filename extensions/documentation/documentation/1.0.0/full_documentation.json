@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/04/2020 8:57:01 AM"
+    "x-generation-date": "06/04/2020 3:38:56 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3225,6 +3225,77 @@
         "parameters": []
       }
     },
+    "/trips/{id}/nextStop": {
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Trip"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/trips": {
       "get": {
         "deprecated": false,
@@ -5902,10 +5973,6 @@
           "id": {
             "type": "string"
           },
-          "passenger_count": {
-            "type": "integer",
-            "default": 0
-          },
           "bus_number": {
             "type": "string"
           },
@@ -5953,10 +6020,6 @@
       },
       "NewBus": {
         "properties": {
-          "passenger_count": {
-            "type": "integer",
-            "default": 0
-          },
           "bus_number": {
             "type": "string"
           },
@@ -6042,6 +6105,9 @@
           "id": {
             "type": "string"
           },
+          "name": {
+            "type": "string"
+          },
           "lat": {
             "type": "number"
           },
@@ -6091,9 +6157,6 @@
               }
             }
           },
-          "name": {
-            "type": "string"
-          },
           "is_hub": {
             "type": "boolean",
             "default": true
@@ -6102,6 +6165,9 @@
       },
       "NewHub": {
         "properties": {
+          "name": {
+            "type": "string"
+          },
           "lat": {
             "type": "number"
           },
@@ -6112,9 +6178,6 @@
             "type": "string"
           },
           "trips": {
-            "type": "string"
-          },
-          "name": {
             "type": "string"
           },
           "is_hub": {
@@ -6176,6 +6239,12 @@
           },
           "time": {
             "type": "time"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "long": {
+            "type": "number"
           }
         }
       },
@@ -6189,6 +6258,12 @@
           },
           "time": {
             "type": "time"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "long": {
+            "type": "number"
           }
         }
       },
@@ -6208,6 +6283,9 @@
               "id": {
                 "type": "string"
               },
+              "name": {
+                "type": "string"
+              },
               "lat": {
                 "type": "number"
               },
@@ -6218,9 +6296,6 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
-              },
-              "name": {
                 "type": "string"
               },
               "is_hub": {
@@ -6236,6 +6311,9 @@
               "id": {
                 "type": "string"
               },
+              "name": {
+                "type": "string"
+              },
               "lat": {
                 "type": "number"
               },
@@ -6246,9 +6324,6 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
-              },
-              "name": {
                 "type": "string"
               },
               "is_hub": {
@@ -6264,6 +6339,9 @@
               "id": {
                 "type": "string"
               },
+              "name": {
+                "type": "string"
+              },
               "lat": {
                 "type": "number"
               },
@@ -6274,9 +6352,6 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
-              },
-              "name": {
                 "type": "string"
               },
               "is_hub": {
@@ -6386,9 +6461,6 @@
               "id": {
                 "type": "string"
               },
-              "passenger_count": {
-                "type": "integer"
-              },
               "bus_number": {
                 "type": "string"
               },
@@ -6452,6 +6524,9 @@
               "id": {
                 "type": "string"
               },
+              "name": {
+                "type": "string"
+              },
               "lat": {
                 "type": "number"
               },
@@ -6462,9 +6537,6 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
-              },
-              "name": {
                 "type": "string"
               },
               "is_hub": {

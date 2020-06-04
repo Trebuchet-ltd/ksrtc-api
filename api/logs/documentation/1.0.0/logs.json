@@ -567,6 +567,12 @@
           },
           "time": {
             "type": "time"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "long": {
+            "type": "number"
           }
         }
       },
@@ -580,6 +586,12 @@
           },
           "time": {
             "type": "time"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "long": {
+            "type": "number"
           }
         }
       }

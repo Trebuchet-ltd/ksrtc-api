@@ -45,6 +45,34 @@ function getParams(lat, lon, radius) {
 
 
 module.exports = {
+    /**
+      * Update a record.
+      *
+      * @return {Object}
+      */
+
+    async nextStop(ctx) {
+        const { id } = ctx.params;
+
+        let entity = await strapi.services.trip.findOne({ id });
+        if (!('last_stop' in entity)) {
+            let payload = {
+                'last_stop': entity.route.stops[1]
+            }
+            entity = await strapi.services.trip.update({ id }, payload);
+        } else {
+            let prev = entity.last_stop;
+            let ids = entity.route.stops.map((s) => { return s._id.toString() });
+            let index = ids.indexOf(prev.id);
+            index = (index + 1 >= entity.route.stops.length) ? entity.route.stops.length - 1 : index + 1;
+            let payload = {
+                'last_stop': entity.route.stops[index]
+            }
+            entity = await strapi.services.trip.update({ id }, payload);
+        }
+        return sanitizeEntity(entity, { model: strapi.models.trip });
+    },
+
     async near(ctx) {
         let { lat, lon, lat_d, lon_d } = ctx.query;
         if (!lat || !lon || !lat_d || !lon_d) {

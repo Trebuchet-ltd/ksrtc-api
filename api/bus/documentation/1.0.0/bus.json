@@ -522,10 +522,6 @@
           "id": {
             "type": "string"
           },
-          "passenger_count": {
-            "type": "integer",
-            "default": 0
-          },
           "bus_number": {
             "type": "string"
           },
@@ -573,10 +569,6 @@
       },
       "NewBus": {
         "properties": {
-          "passenger_count": {
-            "type": "integer",
-            "default": 0
-          },
           "bus_number": {
             "type": "string"
           },

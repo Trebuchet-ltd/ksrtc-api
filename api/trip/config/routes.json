@@ -9,6 +9,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/trips/:id/nextStop",
+      "handler": "trip.nextStop",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/trips",
       "handler": "trip.find",

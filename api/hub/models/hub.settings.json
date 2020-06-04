@@ -9,6 +9,9 @@
     "timestamps": true
   },
   "attributes": {
+    "name": {
+      "type": "string"
+    },
     "lat": {
       "type": "float"
     },
@@ -20,9 +23,6 @@
     },
     "trips": {
       "collection": "trip"
-    },
-    "name": {
-      "type": "string"
     },
     "is_hub": {
       "type": "boolean",

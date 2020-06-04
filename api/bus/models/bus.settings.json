@@ -9,10 +9,6 @@
     "timestamps": true
   },
   "attributes": {
-    "passenger_count": {
-      "type": "integer",
-      "default": 0
-    },
     "bus_number": {
       "type": "string"
     },

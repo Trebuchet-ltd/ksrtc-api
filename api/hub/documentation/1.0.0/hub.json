@@ -522,6 +522,9 @@
           "id": {
             "type": "string"
           },
+          "name": {
+            "type": "string"
+          },
           "lat": {
             "type": "number"
           },
@@ -571,9 +574,6 @@
               }
             }
           },
-          "name": {
-            "type": "string"
-          },
           "is_hub": {
             "type": "boolean",
             "default": true
@@ -582,6 +582,9 @@
       },
       "NewHub": {
         "properties": {
+          "name": {
+            "type": "string"
+          },
           "lat": {
             "type": "number"
           },
@@ -592,9 +595,6 @@
             "type": "string"
           },
           "trips": {
-            "type": "string"
-          },
-          "name": {
             "type": "string"
           },
           "is_hub": {

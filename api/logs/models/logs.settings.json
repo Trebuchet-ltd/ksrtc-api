@@ -17,6 +17,12 @@
     },
     "time": {
       "type": "time"
+    },
+    "lat": {
+      "type": "float"
+    },
+    "long": {
+      "type": "float"
     }
   }
 }
