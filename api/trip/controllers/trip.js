@@ -22,7 +22,6 @@ function convert(la, lo, bias) {
     // console.log('Radian => ', la, lo, centre);
     let x = R * lo * bias;
     let y = R * la
-    console.log('Cartesian: ', x, y);
     return [x, y];
 }
 
@@ -159,6 +158,7 @@ module.exports = {
         let entities = await strapi.query('trip').find({ lat_gt: params.minLat, lat_lt: params.maxLat, long_gt: params.minLon, long_lt: params.maxLon });
 
         console.log('Buses in screen:', entities.length);
+        entities.map((bus) => {console.log(bus.lat, bus.long)})
         return entities.map(entity => sanitizeEntity(entity, { model: strapi.models.trip }));
     },
 };
