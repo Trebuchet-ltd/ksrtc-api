@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "logs",
+  "info": {
+    "name": "Logs"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "action": {
+      "type": "string"
+    },
+    "trip": {
+      "model": "trip"
+    },
+    "time": {
+      "type": "time"
+    }
+  }
+}
