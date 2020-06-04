@@ -17,6 +17,14 @@
       }
     },
     {
+      "method": "PUT",
+      "path": "/trips/:id/location",
+      "handler": "trip.location",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/trips",
       "handler": "trip.find",

@@ -45,8 +45,45 @@ function getParams(lat, lon, radius) {
 
 
 module.exports = {
+
+      /**
+   * Update location.
+   *
+   * @return {Object}
+   */
+
+  async location(ctx) {
+    const { id } = ctx.params;
+
+    let entity;
+    if (ctx.is('multipart')) {
+      const { data, files } = parseMultipartData(ctx);
+      entity = await strapi.services.trip.update({ id }, data, {
+        files,
+      });
+
+      data['action'] = 'update';
+      data['time'] = new Date();
+      data['trip'] = entity.id;
+      strapi.query('logs').create(data);
+      
+      
+    } else {
+      entity = await strapi.services.trip.update({ id }, ctx.request.body);
+
+      let data = ctx.request.body;
+      data['action'] = 'update';
+      data['time'] = new Date();
+      data['trip'] = entity.id;
+      strapi.query('logs').create(data);
+    }
+
+    return sanitizeEntity(entity, { model: strapi.models.trip });
+  },
+
+
     /**
-      * Update a record.
+      * Next stop.
       *
       * @return {Object}
       */
