@@ -42,43 +42,47 @@ function getParams(lat, lon, radius) {
     return params;
 }
 
+function keyInObj(k, obj){
+    return (k in obj) && (obj[k] != null) && (obj[k] !== '')
+}
+
 
 module.exports = {
 
-      /**
-   * Update location.
-   *
-   * @return {Object}
-   */
+    /**
+ * Update location.
+ *
+ * @return {Object}
+ */
 
-  async location(ctx) {
-    const { id } = ctx.params;
+    async location(ctx) {
+        const { id } = ctx.params;
 
-    let entity;
-    if (ctx.is('multipart')) {
-      const { data, files } = parseMultipartData(ctx);
-      entity = await strapi.services.trip.update({ id }, data, {
-        files,
-      });
+        let entity;
+        if (ctx.is('multipart')) {
+            const { data, files } = parseMultipartData(ctx);
+            entity = await strapi.services.trip.update({ id }, data, {
+                files,
+            });
 
-      data['action'] = 'update';
-      data['time'] = new Date();
-      data['trip'] = entity.id;
-      strapi.query('logs').create(data);
-      
-      
-    } else {
-      entity = await strapi.services.trip.update({ id }, ctx.request.body);
+            data['action'] = 'update';
+            data['time'] = new Date();
+            data['trip'] = entity.id;
+            strapi.query('logs').create(data);
 
-      let data = ctx.request.body;
-      data['action'] = 'update';
-      data['time'] = new Date();
-      data['trip'] = entity.id;
-      strapi.query('logs').create(data);
-    }
 
-    return sanitizeEntity(entity, { model: strapi.models.trip });
-  },
+        } else {
+            entity = await strapi.services.trip.update({ id }, ctx.request.body);
+
+            let data = ctx.request.body;
+            data['action'] = 'update';
+            data['time'] = new Date();
+            data['trip'] = entity.id;
+            strapi.query('logs').create(data);
+        }
+
+        return sanitizeEntity(entity, { model: strapi.models.trip });
+    },
 
 
     /**
@@ -100,6 +104,14 @@ module.exports = {
             let prev = entity.next_stop;
             let ids = entity.route.stops.map((s) => { return s._id.toString() });
             let index = ids.indexOf(prev.id);
+            if (!keyInObj('lat', prev) || !keyInObj('long', prev)) {
+                console.log('Adding location to stop: ', prev.name)
+                console.log(ctx.request.body);
+                strapi.query('hub').update(
+                    { id: prev.id },
+                    ctx.request.body
+                );
+            }
             index = (index + 1 >= entity.route.stops.length) ? entity.route.stops.length - 1 : index + 1;
             let payload = {
                 'next_stop': entity.route.stops[index]
@@ -158,7 +170,7 @@ module.exports = {
         let entities = await strapi.query('trip').find({ lat_gt: params.minLat, lat_lt: params.maxLat, long_gt: params.minLon, long_lt: params.maxLon });
 
         console.log('Buses in screen:', entities.length);
-        entities.map((bus) => {console.log(bus.lat, bus.long)})
+        entities.map((bus) => { console.log(bus.lat, bus.long) })
         return entities.map(entity => sanitizeEntity(entity, { model: strapi.models.trip }));
     },
 };
