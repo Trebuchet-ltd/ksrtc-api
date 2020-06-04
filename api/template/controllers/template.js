@@ -20,9 +20,16 @@ module.exports = {
         }
         return strapi.services.template.find(ctx.query, {
             path: 'route',
-            populate: {
+            populate: [{
                 path: 'stops'
+            },
+            {
+                path: 'from'
+            },
+            {
+                path: 'to'
             }
+            ]
         });
     },
 };
