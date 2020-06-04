@@ -37,6 +37,9 @@
     },
     "route": {
       "model": "route"
+    },
+    "last_stop": {
+      "model": "hub"
     }
   }
 }

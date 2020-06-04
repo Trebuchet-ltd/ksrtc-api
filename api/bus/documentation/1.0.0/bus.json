@@ -563,6 +563,9 @@
               },
               "route": {
                 "type": "string"
+              },
+              "last_stop": {
+                "type": "string"
               }
             }
           }

@@ -653,6 +653,34 @@
                 "type": "string"
               }
             }
+          },
+          "last_stop": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "trips": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "is_hub": {
+                "type": "boolean"
+              }
+            }
           }
         }
       },
@@ -683,6 +711,9 @@
             "type": "number"
           },
           "route": {
+            "type": "string"
+          },
+          "last_stop": {
             "type": "string"
           }
         }
