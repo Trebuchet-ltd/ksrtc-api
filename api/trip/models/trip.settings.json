@@ -38,7 +38,7 @@
     "route": {
       "model": "route"
     },
-    "last_stop": {
+    "next_stop": {
       "model": "hub"
     }
   }

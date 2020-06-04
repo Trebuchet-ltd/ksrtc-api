@@ -569,7 +569,7 @@
               "route": {
                 "type": "string"
               },
-              "last_stop": {
+              "next_stop": {
                 "type": "string"
               }
             }

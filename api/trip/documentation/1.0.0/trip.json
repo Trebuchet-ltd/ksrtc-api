@@ -805,7 +805,7 @@
               }
             }
           },
-          "last_stop": {
+          "next_stop": {
             "required": [
               "id"
             ],
@@ -864,7 +864,7 @@
           "route": {
             "type": "string"
           },
-          "last_stop": {
+          "next_stop": {
             "type": "string"
           }
         }

@@ -92,18 +92,18 @@ module.exports = {
         const { id } = ctx.params;
 
         let entity = await strapi.services.trip.findOne({ id });
-        if (!('last_stop' in entity)) {
+        if (!('next_stop' in entity)) {
             let payload = {
-                'last_stop': entity.route.stops[1]
+                'next_stop': entity.route.stops[1]
             }
             entity = await strapi.services.trip.update({ id }, payload);
         } else {
-            let prev = entity.last_stop;
+            let prev = entity.next_stop;
             let ids = entity.route.stops.map((s) => { return s._id.toString() });
             let index = ids.indexOf(prev.id);
             index = (index + 1 >= entity.route.stops.length) ? entity.route.stops.length - 1 : index + 1;
             let payload = {
-                'last_stop': entity.route.stops[index]
+                'next_stop': entity.route.stops[index]
             }
             entity = await strapi.services.trip.update({ id }, payload);
         }
@@ -156,10 +156,9 @@ module.exports = {
         let radius = (v_d > h_d) ? v_d : h_d;
 
         let params = getParams(lat, lon, radius);
-        console.log(lat, lon, radius)
-        console.log(params)
         let entities = await strapi.query('trip').find({ lat_gt: params.minLat, lat_lt: params.maxLat, long_gt: params.minLon, long_lt: params.maxLon });
 
+        console.log('Buses in screen:', entities.length);
         return entities.map(entity => sanitizeEntity(entity, { model: strapi.models.trip }));
     },
 };
