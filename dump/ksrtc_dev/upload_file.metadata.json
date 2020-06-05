@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"ksrtc_dev.upload_file"}],"uuid":"94418e2982cc47ed81526d139fd02316"}

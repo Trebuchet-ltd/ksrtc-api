@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"ksrtc_dev.strapi_administrator"},{"v":{"$numberInt":"2"},"unique":true,"key":{"username":{"$numberInt":"1"}},"name":"username_1","ns":"ksrtc_dev.strapi_administrator","background":true}],"uuid":"59cba00aad9b482cbcf3afe2c08e51fa"}
