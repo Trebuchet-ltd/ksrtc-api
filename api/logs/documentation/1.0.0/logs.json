@@ -568,6 +568,9 @@
               },
               "to": {
                 "type": "string"
+              },
+              "hub": {
+                "type": "string"
               }
             }
           },

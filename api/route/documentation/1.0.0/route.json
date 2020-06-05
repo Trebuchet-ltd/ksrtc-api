@@ -543,10 +543,31 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "is_hub": {
                 "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -571,10 +592,31 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "is_hub": {
                 "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -599,10 +641,31 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "is_hub": {
                 "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           }

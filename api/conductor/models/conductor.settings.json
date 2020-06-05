@@ -15,10 +15,14 @@
     "phone": {
       "type": "string"
     },
-    "trip": {
+    "trips": {
       "via": "conductor",
       "columnName": "Trip",
-      "model": "trip"
+      "collection": "trip"
+    },
+    "hub": {
+      "via": "conductors",
+      "model": "hub"
     }
   }
 }

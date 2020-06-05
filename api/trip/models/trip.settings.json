@@ -19,7 +19,8 @@
       "type": "string"
     },
     "bus": {
-      "model": "bus"
+      "model": "bus",
+      "via": "trips"
     },
     "type": {
       "type": "string"
@@ -27,7 +28,7 @@
     "conductor": {
       "columnName": "Conductor",
       "model": "conductor",
-      "via": "trip"
+      "via": "trips"
     },
     "lat": {
       "type": "float"
@@ -46,6 +47,10 @@
     },
     "to": {
       "type": "string"
+    },
+    "hub": {
+      "via": "trips",
+      "model": "hub"
     }
   }
 }

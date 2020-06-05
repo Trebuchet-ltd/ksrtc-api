@@ -22,11 +22,24 @@
       "type": "string"
     },
     "trips": {
-      "collection": "trip"
+      "collection": "trip",
+      "via": "hub"
     },
     "is_hub": {
       "type": "boolean",
       "default": true
+    },
+    "templates": {
+      "collection": "template",
+      "via": "hub"
+    },
+    "conductors": {
+      "collection": "conductor",
+      "via": "hub"
+    },
+    "buses": {
+      "collection": "bus",
+      "via": "hub"
     }
   }
 }

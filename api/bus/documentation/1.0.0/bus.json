@@ -568,6 +568,110 @@
               },
               "to": {
                 "type": "string"
+              },
+              "hub": {
+                "type": "string"
+              }
+            }
+          },
+          "trips": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "start_time": {
+                  "type": "datetime"
+                },
+                "end_time": {
+                  "type": "datetime"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "bus": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "conductor": {
+                  "type": "string"
+                },
+                "lat": {
+                  "type": "number"
+                },
+                "long": {
+                  "type": "number"
+                },
+                "route": {
+                  "type": "string"
+                },
+                "next_stop": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                },
+                "hub": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "hub": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "is_hub": {
+                "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -579,6 +683,15 @@
             "type": "string"
           },
           "trip": {
+            "type": "string"
+          },
+          "trips": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hub": {
             "type": "string"
           }
         }

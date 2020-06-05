@@ -880,6 +880,15 @@
               },
               "trip": {
                 "type": "string"
+              },
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "hub": {
+                "type": "string"
               }
             }
           },
@@ -900,7 +909,13 @@
               "phone": {
                 "type": "string"
               },
-              "trip": {
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "hub": {
                 "type": "string"
               }
             }
@@ -951,10 +966,31 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "is_hub": {
                 "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -963,6 +999,55 @@
           },
           "to": {
             "type": "string"
+          },
+          "hub": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "is_hub": {
+                "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1002,6 +1087,9 @@
             "type": "string"
           },
           "to": {
+            "type": "string"
+          },
+          "hub": {
             "type": "string"
           }
         }

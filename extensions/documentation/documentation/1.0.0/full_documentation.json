@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/05/2020 9:38:32 AM"
+    "x-generation-date": "06/05/2020 4:28:13 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6295,6 +6295,110 @@
               },
               "to": {
                 "type": "string"
+              },
+              "hub": {
+                "type": "string"
+              }
+            }
+          },
+          "trips": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "start_time": {
+                  "type": "datetime"
+                },
+                "end_time": {
+                  "type": "datetime"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "bus": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "conductor": {
+                  "type": "string"
+                },
+                "lat": {
+                  "type": "number"
+                },
+                "long": {
+                  "type": "number"
+                },
+                "route": {
+                  "type": "string"
+                },
+                "next_stop": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                },
+                "hub": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "hub": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "is_hub": {
+                "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -6306,6 +6410,15 @@
             "type": "string"
           },
           "trip": {
+            "type": "string"
+          },
+          "trips": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hub": {
             "type": "string"
           }
         }
@@ -6324,7 +6437,59 @@
           "phone": {
             "type": "string"
           },
-          "trip": {
+          "trips": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "start_time": {
+                  "type": "datetime"
+                },
+                "end_time": {
+                  "type": "datetime"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "bus": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "conductor": {
+                  "type": "string"
+                },
+                "lat": {
+                  "type": "number"
+                },
+                "long": {
+                  "type": "number"
+                },
+                "route": {
+                  "type": "string"
+                },
+                "next_stop": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                },
+                "hub": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "hub": {
             "required": [
               "id"
             ],
@@ -6332,22 +6497,7 @@
               "id": {
                 "type": "string"
               },
-              "start_time": {
-                "type": "datetime"
-              },
-              "end_time": {
-                "type": "datetime"
-              },
-              "status": {
-                "type": "string"
-              },
-              "bus": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              },
-              "conductor": {
+              "name": {
                 "type": "string"
               },
               "lat": {
@@ -6356,17 +6506,35 @@
               "long": {
                 "type": "number"
               },
-              "route": {
+              "phone": {
                 "type": "string"
               },
-              "next_stop": {
-                "type": "string"
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
-              "from": {
-                "type": "string"
+              "is_hub": {
+                "type": "boolean"
               },
-              "to": {
-                "type": "string"
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -6380,7 +6548,13 @@
           "phone": {
             "type": "string"
           },
-          "trip": {
+          "trips": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hub": {
             "type": "string"
           }
         }
@@ -6406,54 +6580,141 @@
             "type": "string"
           },
           "trips": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "start_time": {
-                "type": "datetime"
-              },
-              "end_time": {
-                "type": "datetime"
-              },
-              "status": {
-                "type": "string"
-              },
-              "bus": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              },
-              "conductor": {
-                "type": "string"
-              },
-              "lat": {
-                "type": "number"
-              },
-              "long": {
-                "type": "number"
-              },
-              "route": {
-                "type": "string"
-              },
-              "next_stop": {
-                "type": "string"
-              },
-              "from": {
-                "type": "string"
-              },
-              "to": {
-                "type": "string"
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "start_time": {
+                  "type": "datetime"
+                },
+                "end_time": {
+                  "type": "datetime"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "bus": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "conductor": {
+                  "type": "string"
+                },
+                "lat": {
+                  "type": "number"
+                },
+                "long": {
+                  "type": "number"
+                },
+                "route": {
+                  "type": "string"
+                },
+                "next_stop": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                },
+                "hub": {
+                  "type": "string"
+                }
               }
             }
           },
           "is_hub": {
             "type": "boolean",
             "default": true
+          },
+          "templates": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "route": {
+                  "type": "string"
+                },
+                "startTime": {
+                  "type": "time"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "hub": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "conductors": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "emp_id": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "trips": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "hub": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "buses": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "bus_number": {
+                  "type": "string"
+                },
+                "trip": {
+                  "type": "string"
+                },
+                "trips": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "hub": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -6472,11 +6733,32 @@
             "type": "string"
           },
           "trips": {
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "is_hub": {
             "type": "boolean",
             "default": true
+          },
+          "templates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conductors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "buses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -6533,6 +6815,9 @@
                 "type": "string"
               },
               "to": {
+                "type": "string"
+              },
+              "hub": {
                 "type": "string"
               }
             }
@@ -6596,10 +6881,31 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "is_hub": {
                 "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -6624,10 +6930,31 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "is_hub": {
                 "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -6652,10 +6979,31 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "is_hub": {
                 "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -6713,6 +7061,55 @@
               "LS",
               "FP"
             ]
+          },
+          "hub": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "is_hub": {
+                "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -6733,6 +7130,9 @@
               "LS",
               "FP"
             ]
+          },
+          "hub": {
+            "type": "string"
           }
         }
       },
@@ -6766,6 +7166,15 @@
               },
               "trip": {
                 "type": "string"
+              },
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "hub": {
+                "type": "string"
               }
             }
           },
@@ -6786,7 +7195,13 @@
               "phone": {
                 "type": "string"
               },
-              "trip": {
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "hub": {
                 "type": "string"
               }
             }
@@ -6837,10 +7252,31 @@
                 "type": "string"
               },
               "trips": {
-                "type": "string"
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "is_hub": {
                 "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -6849,6 +7285,55 @@
           },
           "to": {
             "type": "string"
+          },
+          "hub": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "is_hub": {
+                "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -6888,6 +7373,9 @@
             "type": "string"
           },
           "to": {
+            "type": "string"
+          },
+          "hub": {
             "type": "string"
           }
         }

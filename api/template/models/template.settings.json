@@ -24,6 +24,10 @@
         "LS",
         "FP"
       ]
+    },
+    "hub": {
+      "via": "templates",
+      "model": "hub"
     }
   }
 }

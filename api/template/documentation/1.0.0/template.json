@@ -678,6 +678,55 @@
               "LS",
               "FP"
             ]
+          },
+          "hub": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "is_hub": {
+                "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -698,6 +747,9 @@
               "LS",
               "FP"
             ]
+          },
+          "hub": {
+            "type": "string"
           }
         }
       }

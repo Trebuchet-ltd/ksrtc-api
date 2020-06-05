@@ -535,54 +535,141 @@
             "type": "string"
           },
           "trips": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "start_time": {
-                "type": "datetime"
-              },
-              "end_time": {
-                "type": "datetime"
-              },
-              "status": {
-                "type": "string"
-              },
-              "bus": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              },
-              "conductor": {
-                "type": "string"
-              },
-              "lat": {
-                "type": "number"
-              },
-              "long": {
-                "type": "number"
-              },
-              "route": {
-                "type": "string"
-              },
-              "next_stop": {
-                "type": "string"
-              },
-              "from": {
-                "type": "string"
-              },
-              "to": {
-                "type": "string"
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "start_time": {
+                  "type": "datetime"
+                },
+                "end_time": {
+                  "type": "datetime"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "bus": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "conductor": {
+                  "type": "string"
+                },
+                "lat": {
+                  "type": "number"
+                },
+                "long": {
+                  "type": "number"
+                },
+                "route": {
+                  "type": "string"
+                },
+                "next_stop": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                },
+                "hub": {
+                  "type": "string"
+                }
               }
             }
           },
           "is_hub": {
             "type": "boolean",
             "default": true
+          },
+          "templates": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "route": {
+                  "type": "string"
+                },
+                "startTime": {
+                  "type": "time"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "hub": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "conductors": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "emp_id": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "trips": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "hub": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "buses": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "bus_number": {
+                  "type": "string"
+                },
+                "trip": {
+                  "type": "string"
+                },
+                "trips": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "hub": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -601,11 +688,32 @@
             "type": "string"
           },
           "trips": {
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "is_hub": {
             "type": "boolean",
             "default": true
+          },
+          "templates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conductors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "buses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
