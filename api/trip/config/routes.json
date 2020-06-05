@@ -26,6 +26,22 @@
     },
     {
       "method": "GET",
+      "path": "/trips/getDeep",
+      "handler": "trip.getDeep",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/trips/:id/getDeep",
+      "handler": "trip.getOneDeep",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/trips",
       "handler": "trip.find",
       "config": {

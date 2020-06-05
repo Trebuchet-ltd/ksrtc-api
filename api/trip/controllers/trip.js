@@ -42,7 +42,7 @@ function getParams(lat, lon, radius) {
     return params;
 }
 
-function keyInObj(k, obj){
+function keyInObj(k, obj) {
     return (k in obj) && (obj[k] != null) && (obj[k] !== '')
 }
 
@@ -172,5 +172,56 @@ module.exports = {
         console.log('Buses in screen:', entities.length);
         entities.map((bus) => { console.log(bus.lat, bus.long) })
         return entities.map(entity => sanitizeEntity(entity, { model: strapi.models.trip }));
+    },
+
+    /**
+ * Retrieve a deeply populated record.
+ *
+ * @return {Object}
+ */
+
+    async getOneDeep(ctx) {
+        const { id } = ctx.params;
+
+        const entity = await strapi.services.trip.findOne({ id }, {
+            path: 'route',
+            populate: [{
+                path: 'stops'
+            },
+            {
+                path: 'from'
+            },
+            {
+                path: 'to'
+            }
+            ]
+        });
+        return sanitizeEntity(entity, { model: strapi.models.trip });
+    },
+
+
+    /**
+ * Retrieve records.
+ *
+ * @return {Array}
+ */
+
+    async getDeep(ctx) {
+        if (ctx.query._q) {
+            return strapi.services.trip.search(ctx.query);
+        }
+        return strapi.services.trip.find(ctx.query, {
+            path: 'route',
+            populate: [{
+                path: 'stops'
+            },
+            {
+                path: 'from'
+            },
+            {
+                path: 'to'
+            }
+            ]
+        });
     },
 };
