@@ -183,19 +183,33 @@ module.exports = {
     async getOneDeep(ctx) {
         const { id } = ctx.params;
 
-        const entity = await strapi.services.trip.findOne({ id }, {
-            path: 'route',
-            populate: [{
-                path: 'stops'
+        const entity = await strapi.services.trip.findOne({ id },  [
+            {
+                path: 'route',
+                populate: [{
+                    path: 'stops'
+                },
+                {
+                    path: 'from'
+                },
+                {
+                    path: 'to'
+                }
+                ]
             },
             {
-                path: 'from'
+                path: 'conductor'
             },
             {
-                path: 'to'
-            }
-            ]
-        });
+                path: 'bus'
+            },
+            {
+                path: 'next_stop'
+            },
+            {
+                path: 'hub'
+            },
+        ]);
         return sanitizeEntity(entity, { model: strapi.models.trip });
     },
 
@@ -210,18 +224,32 @@ module.exports = {
         if (ctx.query._q) {
             return strapi.services.trip.search(ctx.query);
         }
-        return strapi.services.trip.find(ctx.query, {
-            path: 'route',
-            populate: [{
-                path: 'stops'
+        return strapi.services.trip.find(ctx.query, [
+            {
+                path: 'route',
+                populate: [{
+                    path: 'stops'
+                },
+                {
+                    path: 'from'
+                },
+                {
+                    path: 'to'
+                }
+                ]
             },
             {
-                path: 'from'
+                path: 'conductor'
             },
             {
-                path: 'to'
-            }
-            ]
-        });
+                path: 'bus'
+            },
+            {
+                path: 'next_stop'
+            },
+            {
+                path: 'hub'
+            },
+        ]);
     },
 };
