@@ -26,9 +26,10 @@
       "type": "string"
     },
     "conductor": {
+      "via": "trips",
+      "plugin": "users-permissions",
       "columnName": "Conductor",
-      "model": "conductor",
-      "via": "trips"
+      "model": "user"
     },
     "lat": {
       "type": "float"

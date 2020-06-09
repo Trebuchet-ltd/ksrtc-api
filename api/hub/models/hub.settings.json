@@ -34,8 +34,9 @@
       "via": "hub"
     },
     "conductors": {
-      "collection": "conductor",
-      "via": "hub"
+      "via": "hub",
+      "plugin": "users-permissions",
+      "collection": "user"
     },
     "buses": {
       "collection": "bus",
