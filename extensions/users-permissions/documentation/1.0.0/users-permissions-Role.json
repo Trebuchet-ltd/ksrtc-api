@@ -620,6 +620,9 @@
                 },
                 "user_type": {
                   "type": "string"
+                },
+                "current_trip": {
+                  "type": "string"
                 }
               }
             }

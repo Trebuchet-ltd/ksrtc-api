@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/09/2020 8:18:25 AM"
+    "x-generation-date": "06/09/2020 8:20:22 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6069,6 +6069,9 @@
                 },
                 "user_type": {
                   "type": "string"
+                },
+                "current_trip": {
+                  "type": "string"
                 }
               }
             }
@@ -6614,6 +6617,9 @@
               },
               "user_type": {
                 "type": "string"
+              },
+              "current_trip": {
+                "type": "string"
               }
             }
           },
@@ -6898,6 +6904,9 @@
                 },
                 "user_type": {
                   "type": "string"
+                },
+                "current_trip": {
+                  "type": "string"
                 }
               }
             }
@@ -7106,6 +7115,58 @@
               "conductor",
               "driver"
             ]
+          },
+          "current_trip": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "start_time": {
+                "type": "datetime"
+              },
+              "end_time": {
+                "type": "datetime"
+              },
+              "status": {
+                "type": "string"
+              },
+              "bus": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "conductor": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
+              },
+              "route": {
+                "type": "string"
+              },
+              "next_stop": {
+                "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
+              },
+              "hub": {
+                "type": "string"
+              },
+              "number_of_passengers": {
+                "type": "integer"
+              }
+            }
           }
         }
       },
@@ -7161,6 +7222,9 @@
               "conductor",
               "driver"
             ]
+          },
+          "current_trip": {
+            "type": "string"
           }
         }
       },
