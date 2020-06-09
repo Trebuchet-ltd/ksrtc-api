@@ -8,21 +8,5 @@
     "increments": true,
     "timestamps": true
   },
-  "attributes": {
-    "emp_id": {
-      "type": "string"
-    },
-    "phone": {
-      "type": "string"
-    },
-    "trips": {
-      "via": "conductor",
-      "columnName": "Trip",
-      "collection": "trip"
-    },
-    "hub": {
-      "via": "conductors",
-      "model": "hub"
-    }
-  }
+  "attributes": {}
 }

@@ -608,6 +608,21 @@
                 },
                 "role": {
                   "type": "string"
+                },
+                "trips": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "hub": {
+                  "type": "string"
+                },
+                "current_trip": {
+                  "type": "string"
+                },
+                "user_type": {
+                  "type": "string"
                 }
               }
             }
