@@ -49,8 +49,11 @@
       "type": "string"
     },
     "hub": {
-      "via": "trips",
-      "model": "hub"
+      "model": "hub",
+      "via": "trips"
+    },
+    "number_of_passengers": {
+      "type": "integer"
     }
   }
 }

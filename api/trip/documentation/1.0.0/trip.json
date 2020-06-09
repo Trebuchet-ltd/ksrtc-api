@@ -1048,6 +1048,9 @@
                 }
               }
             }
+          },
+          "number_of_passengers": {
+            "type": "integer"
           }
         }
       },
@@ -1091,6 +1094,9 @@
           },
           "hub": {
             "type": "string"
+          },
+          "number_of_passengers": {
+            "type": "integer"
           }
         }
       }
