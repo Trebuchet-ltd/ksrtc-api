@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "attendances",
+  "info": {
+    "name": "attendance"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "employee": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "time": {
+      "type": "datetime"
+    },
+    "hub": {
+      "model": "hub"
+    }
+  }
+}
