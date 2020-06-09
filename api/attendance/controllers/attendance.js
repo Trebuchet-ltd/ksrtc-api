@@ -89,9 +89,18 @@ module.exports = {
                         hub: user.hub
                     }
 
-                    let entity = await strapi.query('attendance').create(data);
+                    strapi.query('attendance').create(data);
 
-                    return entity;
+                    let now = new Date()
+                    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
+                    let trips = await strapi.query('trip').model.find({ 
+                        conductor: id, 
+                        start_time: {$gte: today}
+                     });
+
+
+                    return trips;
 
                 }
 
