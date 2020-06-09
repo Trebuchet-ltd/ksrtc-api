@@ -9,6 +9,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/attendance/checkin",
+      "handler": "attendance.checkin",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/attendances/count",
       "handler": "attendance.count",
