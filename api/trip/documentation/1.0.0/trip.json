@@ -897,36 +897,16 @@
           },
           "conductor": {
             "required": [
-              "id",
-              "username",
-              "email"
+              "id"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "username": {
+              "emp_id": {
                 "type": "string"
               },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
+              "phone": {
                 "type": "string"
               },
               "trips": {
@@ -936,12 +916,6 @@
                 }
               },
               "hub": {
-                "type": "string"
-              },
-              "current_trip": {
-                "type": "string"
-              },
-              "user_type": {
                 "type": "string"
               }
             }

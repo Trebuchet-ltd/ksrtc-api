@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/09/2020 7:58:00 AM"
+    "x-generation-date": "06/08/2020 7:33:36 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6676,36 +6676,16 @@
             "type": "array",
             "items": {
               "required": [
-                "id",
-                "username",
-                "email"
+                "id"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "username": {
+                "emp_id": {
                   "type": "string"
                 },
-                "email": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "resetPasswordToken": {
-                  "type": "string"
-                },
-                "confirmed": {
-                  "type": "boolean"
-                },
-                "blocked": {
-                  "type": "boolean"
-                },
-                "role": {
+                "phone": {
                   "type": "string"
                 },
                 "trips": {
@@ -6715,12 +6695,6 @@
                   }
                 },
                 "hub": {
-                  "type": "string"
-                },
-                "current_trip": {
-                  "type": "string"
-                },
-                "user_type": {
                   "type": "string"
                 }
               }
@@ -7224,36 +7198,16 @@
           },
           "conductor": {
             "required": [
-              "id",
-              "username",
-              "email"
+              "id"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "username": {
+              "emp_id": {
                 "type": "string"
               },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
+              "phone": {
                 "type": "string"
               },
               "trips": {
@@ -7263,12 +7217,6 @@
                 }
               },
               "hub": {
-                "type": "string"
-              },
-              "current_trip": {
-                "type": "string"
-              },
-              "user_type": {
                 "type": "string"
               }
             }
@@ -7542,21 +7490,6 @@
                 },
                 "role": {
                   "type": "string"
-                },
-                "trips": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "hub": {
-                  "type": "string"
-                },
-                "current_trip": {
-                  "type": "string"
-                },
-                "user_type": {
-                  "type": "string"
                 }
               }
             }
@@ -7652,172 +7585,6 @@
                 }
               }
             }
-          },
-          "trips": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "start_time": {
-                  "type": "datetime"
-                },
-                "end_time": {
-                  "type": "datetime"
-                },
-                "status": {
-                  "type": "string"
-                },
-                "bus": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "conductor": {
-                  "type": "string"
-                },
-                "lat": {
-                  "type": "number"
-                },
-                "long": {
-                  "type": "number"
-                },
-                "route": {
-                  "type": "string"
-                },
-                "next_stop": {
-                  "type": "string"
-                },
-                "from": {
-                  "type": "string"
-                },
-                "to": {
-                  "type": "string"
-                },
-                "hub": {
-                  "type": "string"
-                },
-                "number_of_passengers": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "hub": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "lat": {
-                "type": "number"
-              },
-              "long": {
-                "type": "number"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "trips": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "is_hub": {
-                "type": "boolean"
-              },
-              "templates": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "conductors": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "buses": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "current_trip": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "start_time": {
-                "type": "datetime"
-              },
-              "end_time": {
-                "type": "datetime"
-              },
-              "status": {
-                "type": "string"
-              },
-              "bus": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              },
-              "conductor": {
-                "type": "string"
-              },
-              "lat": {
-                "type": "number"
-              },
-              "long": {
-                "type": "number"
-              },
-              "route": {
-                "type": "string"
-              },
-              "next_stop": {
-                "type": "string"
-              },
-              "from": {
-                "type": "string"
-              },
-              "to": {
-                "type": "string"
-              },
-              "hub": {
-                "type": "string"
-              },
-              "number_of_passengers": {
-                "type": "integer"
-              }
-            }
-          },
-          "user_type": {
-            "type": "string",
-            "default": "admin",
-            "enum": [
-              "admin",
-              "depot",
-              "conductor",
-              "driver"
-            ]
           }
         }
       },
@@ -7855,28 +7622,6 @@
           },
           "role": {
             "type": "string"
-          },
-          "trips": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "hub": {
-            "type": "string"
-          },
-          "current_trip": {
-            "type": "string"
-          },
-          "user_type": {
-            "type": "string",
-            "default": "admin",
-            "enum": [
-              "admin",
-              "depot",
-              "conductor",
-              "driver"
-            ]
           }
         }
       },
