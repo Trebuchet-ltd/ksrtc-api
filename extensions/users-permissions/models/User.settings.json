@@ -59,8 +59,8 @@
       "via": "conductor"
     },
     "hub": {
-      "model": "hub",
-      "via": "conductors"
+      "via": "conductors",
+      "model": "hub"
     },
     "user_type": {
       "type": "enumeration",

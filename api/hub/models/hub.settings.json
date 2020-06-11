@@ -22,8 +22,8 @@
       "type": "string"
     },
     "trips": {
-      "via": "hub",
-      "collection": "trip"
+      "collection": "trip",
+      "via": "hub"
     },
     "is_hub": {
       "type": "boolean",
@@ -34,13 +34,16 @@
       "via": "hub"
     },
     "conductors": {
-      "via": "hub",
       "plugin": "users-permissions",
-      "collection": "user"
+      "collection": "user",
+      "via": "hub"
     },
     "buses": {
       "collection": "bus",
       "via": "hub"
+    },
+    "code": {
+      "type": "string"
     }
   }
 }

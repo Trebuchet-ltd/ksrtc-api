@@ -1346,6 +1346,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "code": {
+                "type": "string"
               }
             }
           },

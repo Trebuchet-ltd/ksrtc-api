@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/11/2020 3:32:33 PM"
+    "x-generation-date": "06/11/2020 5:17:06 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6420,6 +6420,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "code": {
+                "type": "string"
               }
             }
           }
@@ -6602,6 +6605,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "code": {
+                "type": "string"
               }
             }
           }
@@ -6811,6 +6817,9 @@
                 }
               }
             }
+          },
+          "code": {
+            "type": "string"
           }
         }
       },
@@ -6855,6 +6864,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "code": {
+            "type": "string"
           }
         }
       },
@@ -6979,6 +6991,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "code": {
+                "type": "string"
               }
             }
           }
@@ -7063,6 +7078,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "code": {
+                "type": "string"
               }
             }
           },
@@ -7112,6 +7130,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "code": {
+                "type": "string"
               }
             }
           },
@@ -7161,6 +7182,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "code": {
+                "type": "string"
               }
             }
           }
@@ -7265,6 +7289,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "code": {
+                "type": "string"
               }
             }
           }
@@ -7460,6 +7487,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "code": {
+                "type": "string"
               }
             }
           },
@@ -7515,6 +7545,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "code": {
+                "type": "string"
               }
             }
           },
@@ -7870,6 +7903,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "code": {
+                "type": "string"
               }
             }
           },

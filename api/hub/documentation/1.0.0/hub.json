@@ -699,6 +699,9 @@
                 }
               }
             }
+          },
+          "code": {
+            "type": "string"
           }
         }
       },
@@ -743,6 +746,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "code": {
+            "type": "string"
           }
         }
       }
