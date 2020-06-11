@@ -78,6 +78,8 @@ module.exports = {
             data['action'] = 'update';
             data['time'] = new Date();
             data['trip'] = entity.id;
+            data['next_stop'] = entity.next_stop;
+            data['number_of_passengers'] = entity.number_of_passengers;
             strapi.query('logs').create(data);
         }
 
