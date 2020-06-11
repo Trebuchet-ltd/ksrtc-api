@@ -9,6 +9,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/trips/endCurrentTrip",
+      "handler": "trip.endCurrentTrip",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/trips/:id/nextStop",
       "handler": "trip.nextStop",

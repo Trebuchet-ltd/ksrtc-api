@@ -49,6 +49,48 @@ function keyInObj(k, obj) {
 
 module.exports = {
 
+
+    async endCurrentTrip(ctx) {
+
+        if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
+            try {
+                const { id, isAdmin = false } = await strapi.plugins[
+                    'users-permissions'
+                ].services.jwt.getToken(ctx);
+
+                const user = ctx.state.user;
+                let entity = await strapi.services.trip.update({ id: user.current_trip }, { status: 'complete' });
+
+                let data = {
+                    user: id,
+                    time: new Date(),
+                    hub: entity.route.to
+                }
+
+                strapi.query('attendance').create(data);
+
+                return entity;
+
+            } catch (err) {
+                // It will be there!
+                console.log(err)
+                ctx.response.status = 500;
+                let error_pack = {
+                    status: 500
+                }
+                return error_pack;
+
+            }
+        }
+
+        ctx.response.status = 401;
+        let error_pack = {
+            status: 401,
+            message: 'You must be logged in as a conductor for this operation.'
+        }
+        return error_pack;
+    },
+
     /**
  * Update location.
  *
@@ -185,7 +227,7 @@ module.exports = {
     async getOneDeep(ctx) {
         const { id } = ctx.params;
 
-        const entity = await strapi.services.trip.findOne({ id },  [
+        const entity = await strapi.services.trip.findOne({ id }, [
             {
                 path: 'route',
                 populate: [{
