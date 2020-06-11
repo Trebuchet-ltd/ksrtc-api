@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/10/2020 12:03:26 AM"
+    "x-generation-date": "06/11/2020 3:32:33 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6929,6 +6929,58 @@
           },
           "long": {
             "type": "number"
+          },
+          "number_of_passengers": {
+            "type": "integer"
+          },
+          "next_stop": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "long": {
+                "type": "number"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "is_hub": {
+                "type": "boolean"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conductors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -6948,6 +7000,12 @@
           },
           "long": {
             "type": "number"
+          },
+          "number_of_passengers": {
+            "type": "integer"
+          },
+          "next_stop": {
+            "type": "string"
           }
         }
       },

@@ -23,6 +23,12 @@
     },
     "long": {
       "type": "float"
+    },
+    "number_of_passengers": {
+      "type": "integer"
+    },
+    "next_stop": {
+      "model": "hub"
     }
   }
 }
