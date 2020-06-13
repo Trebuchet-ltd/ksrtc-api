@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/13/2020 5:14:59 AM"
+    "x-generation-date": "06/13/2020 5:41:40 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6558,6 +6558,9 @@
               },
               "number_of_passengers": {
                 "type": "integer"
+              },
+              "total_collection": {
+                "type": "integer"
               }
             }
           },
@@ -6611,6 +6614,9 @@
                   "type": "string"
                 },
                 "number_of_passengers": {
+                  "type": "integer"
+                },
+                "total_collection": {
                   "type": "integer"
                 }
               }
@@ -6767,6 +6773,9 @@
                   "type": "string"
                 },
                 "number_of_passengers": {
+                  "type": "integer"
+                },
+                "total_collection": {
                   "type": "integer"
                 }
               }
@@ -6997,6 +7006,9 @@
                 "type": "string"
               },
               "number_of_passengers": {
+                "type": "integer"
+              },
+              "total_collection": {
                 "type": "integer"
               }
             }
@@ -7624,6 +7636,9 @@
           },
           "number_of_passengers": {
             "type": "integer"
+          },
+          "total_collection": {
+            "type": "integer"
           }
         }
       },
@@ -7669,6 +7684,9 @@
             "type": "string"
           },
           "number_of_passengers": {
+            "type": "integer"
+          },
+          "total_collection": {
             "type": "integer"
           }
         }
@@ -7924,6 +7942,9 @@
                 },
                 "number_of_passengers": {
                   "type": "integer"
+                },
+                "total_collection": {
+                  "type": "integer"
                 }
               }
             }
@@ -8037,6 +8058,9 @@
                 "type": "string"
               },
               "number_of_passengers": {
+                "type": "integer"
+              },
+              "total_collection": {
                 "type": "integer"
               }
             }

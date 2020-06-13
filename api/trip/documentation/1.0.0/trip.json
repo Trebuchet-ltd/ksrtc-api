@@ -1143,6 +1143,9 @@
           },
           "number_of_passengers": {
             "type": "integer"
+          },
+          "total_collection": {
+            "type": "integer"
           }
         }
       },
@@ -1188,6 +1191,9 @@
             "type": "string"
           },
           "number_of_passengers": {
+            "type": "integer"
+          },
+          "total_collection": {
             "type": "integer"
           }
         }

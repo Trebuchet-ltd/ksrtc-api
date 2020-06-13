@@ -22,8 +22,8 @@
       "type": "string"
     },
     "trips": {
-      "collection": "trip",
-      "via": "hub"
+      "via": "hub",
+      "collection": "trip"
     },
     "is_hub": {
       "type": "boolean",

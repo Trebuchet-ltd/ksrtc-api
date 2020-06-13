@@ -585,6 +585,9 @@
                 },
                 "number_of_passengers": {
                   "type": "integer"
+                },
+                "total_collection": {
+                  "type": "integer"
                 }
               }
             }
