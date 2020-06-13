@@ -39,8 +39,8 @@
       "via": "hub"
     },
     "buses": {
-      "collection": "bus",
-      "via": "hub"
+      "via": "hub",
+      "collection": "bus"
     },
     "code": {
       "type": "string"

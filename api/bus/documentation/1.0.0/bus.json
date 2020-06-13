@@ -683,6 +683,10 @@
                 "type": "string"
               }
             }
+          },
+          "capacity": {
+            "type": "integer",
+            "default": 25
           }
         }
       },
@@ -702,6 +706,10 @@
           },
           "hub": {
             "type": "string"
+          },
+          "capacity": {
+            "type": "integer",
+            "default": 25
           }
         }
       }

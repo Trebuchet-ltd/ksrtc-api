@@ -19,8 +19,8 @@
       "type": "string"
     },
     "bus": {
-      "model": "bus",
-      "via": "trips"
+      "via": "trips",
+      "model": "bus"
     },
     "type": {
       "type": "string"

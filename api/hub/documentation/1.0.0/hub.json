@@ -696,6 +696,9 @@
                 },
                 "hub": {
                   "type": "string"
+                },
+                "capacity": {
+                  "type": "integer"
                 }
               }
             }

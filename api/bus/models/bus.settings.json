@@ -16,12 +16,16 @@
       "model": "trip"
     },
     "trips": {
-      "via": "bus",
-      "collection": "trip"
+      "collection": "trip",
+      "via": "bus"
     },
     "hub": {
-      "via": "buses",
-      "model": "hub"
+      "model": "hub",
+      "via": "buses"
+    },
+    "capacity": {
+      "type": "integer",
+      "default": 25
     }
   }
 }
