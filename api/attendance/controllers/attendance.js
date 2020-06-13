@@ -94,10 +94,10 @@ module.exports = {
                     let now = new Date()
                     let today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
-                    let trips = await strapi.query('trip').model.find({ 
-                        conductor: id, 
-                        start_time: {$gte: today}
-                     });
+                    let trips = await strapi.query('trip').find({
+                        conductor: id,
+                        start_time_gte: today
+                    });
 
 
                     return trips;
