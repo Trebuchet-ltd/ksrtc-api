@@ -54,9 +54,9 @@
       "configurable": false
     },
     "trips": {
-      "via": "conductor",
       "columnName": "Trip",
-      "collection": "trip"
+      "collection": "trip",
+      "via": "conductor"
     },
     "hub": {
       "via": "conductors",

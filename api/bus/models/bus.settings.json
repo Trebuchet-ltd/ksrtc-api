@@ -16,8 +16,8 @@
       "model": "trip"
     },
     "trips": {
-      "via": "bus",
-      "collection": "trip"
+      "collection": "trip",
+      "via": "bus"
     },
     "hub": {
       "model": "hub",

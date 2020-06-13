@@ -19,17 +19,17 @@
       "type": "string"
     },
     "bus": {
-      "model": "bus",
-      "via": "trips"
+      "via": "trips",
+      "model": "bus"
     },
     "type": {
       "type": "string"
     },
     "conductor": {
-      "columnName": "Conductor",
+      "via": "trips",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "trips"
+      "columnName": "Conductor",
+      "model": "user"
     },
     "lat": {
       "type": "float"
@@ -50,13 +50,10 @@
       "type": "string"
     },
     "hub": {
-      "model": "hub",
-      "via": "trips"
+      "via": "trips",
+      "model": "hub"
     },
     "number_of_passengers": {
-      "type": "integer"
-    },
-    "collection": {
       "type": "integer"
     }
   }
