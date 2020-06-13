@@ -99,8 +99,8 @@ module.exports = {
                         start_time_gte: today
                     });
 
-
-                    return trips;
+                    return sanitizeEntity(trips, { model: strapi.models.trip });
+                    // return trips;
 
                 }
 
