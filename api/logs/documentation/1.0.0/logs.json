@@ -539,9 +539,6 @@
               "end_time": {
                 "type": "datetime"
               },
-              "status": {
-                "type": "string"
-              },
               "bus": {
                 "type": "string"
               },
@@ -577,6 +574,9 @@
               },
               "total_collection": {
                 "type": "integer"
+              },
+              "status": {
+                "type": "string"
               }
             }
           },

@@ -15,9 +15,6 @@
     "end_time": {
       "type": "datetime"
     },
-    "status": {
-      "type": "string"
-    },
     "bus": {
       "model": "bus",
       "via": "trips"
@@ -58,6 +55,15 @@
     },
     "total_collection": {
       "type": "integer"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "completed"
+      ],
+      "default": "not_started"
     }
   }
 }

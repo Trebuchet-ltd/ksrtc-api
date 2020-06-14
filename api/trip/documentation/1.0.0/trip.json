@@ -921,9 +921,6 @@
           "end_time": {
             "type": "datetime"
           },
-          "status": {
-            "type": "string"
-          },
           "bus": {
             "required": [
               "id"
@@ -1146,6 +1143,15 @@
           },
           "total_collection": {
             "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "default": "not_started",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "completed"
+            ]
           }
         }
       },
@@ -1156,9 +1162,6 @@
           },
           "end_time": {
             "type": "datetime"
-          },
-          "status": {
-            "type": "string"
           },
           "bus": {
             "type": "string"
@@ -1195,6 +1198,15 @@
           },
           "total_collection": {
             "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "default": "not_started",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "completed"
+            ]
           }
         }
       }

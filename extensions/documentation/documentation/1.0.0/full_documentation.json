@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/13/2020 5:41:40 AM"
+    "x-generation-date": "06/14/2020 6:29:02 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6523,9 +6523,6 @@
               "end_time": {
                 "type": "datetime"
               },
-              "status": {
-                "type": "string"
-              },
               "bus": {
                 "type": "string"
               },
@@ -6561,6 +6558,9 @@
               },
               "total_collection": {
                 "type": "integer"
+              },
+              "status": {
+                "type": "string"
               }
             }
           },
@@ -6579,9 +6579,6 @@
                 },
                 "end_time": {
                   "type": "datetime"
-                },
-                "status": {
-                  "type": "string"
                 },
                 "bus": {
                   "type": "string"
@@ -6618,6 +6615,9 @@
                 },
                 "total_collection": {
                   "type": "integer"
+                },
+                "status": {
+                  "type": "string"
                 }
               }
             }
@@ -6739,9 +6739,6 @@
                 "end_time": {
                   "type": "datetime"
                 },
-                "status": {
-                  "type": "string"
-                },
                 "bus": {
                   "type": "string"
                 },
@@ -6777,6 +6774,9 @@
                 },
                 "total_collection": {
                   "type": "integer"
+                },
+                "status": {
+                  "type": "string"
                 }
               }
             }
@@ -6972,9 +6972,6 @@
               "end_time": {
                 "type": "datetime"
               },
-              "status": {
-                "type": "string"
-              },
               "bus": {
                 "type": "string"
               },
@@ -7010,6 +7007,9 @@
               },
               "total_collection": {
                 "type": "integer"
+              },
+              "status": {
+                "type": "string"
               }
             }
           },
@@ -7414,9 +7414,6 @@
           "end_time": {
             "type": "datetime"
           },
-          "status": {
-            "type": "string"
-          },
           "bus": {
             "required": [
               "id"
@@ -7639,6 +7636,15 @@
           },
           "total_collection": {
             "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "default": "not_started",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "completed"
+            ]
           }
         }
       },
@@ -7649,9 +7655,6 @@
           },
           "end_time": {
             "type": "datetime"
-          },
-          "status": {
-            "type": "string"
           },
           "bus": {
             "type": "string"
@@ -7688,6 +7691,15 @@
           },
           "total_collection": {
             "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "default": "not_started",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "completed"
+            ]
           }
         }
       },
@@ -7907,9 +7919,6 @@
                 "end_time": {
                   "type": "datetime"
                 },
-                "status": {
-                  "type": "string"
-                },
                 "bus": {
                   "type": "string"
                 },
@@ -7945,6 +7954,9 @@
                 },
                 "total_collection": {
                   "type": "integer"
+                },
+                "status": {
+                  "type": "string"
                 }
               }
             }
@@ -8024,9 +8036,6 @@
               "end_time": {
                 "type": "datetime"
               },
-              "status": {
-                "type": "string"
-              },
               "bus": {
                 "type": "string"
               },
@@ -8062,6 +8071,9 @@
               },
               "total_collection": {
                 "type": "integer"
+              },
+              "status": {
+                "type": "string"
               }
             }
           }
