@@ -60,6 +60,72 @@ module.exports = {
 
                 const user = ctx.state.user;
 
+                let lat = ctx.request.body.lat;
+                let lon = ctx.request.body.lon;
+
+
+                if (!lat || !lon) {
+                    ctx.response.status = 400;
+                    ctx.response.error = 'Bad request.'
+                    let error_pack = {
+                        status: 400,
+                        error: 'Bad request.',
+                        message: 'Coordinates not supplied with the request. You should supply lat and lon.'
+                    }
+                    return error_pack;
+                }
+
+                lat = parseFloat(lat);
+                lon = parseFloat(lon);
+
+
+                let hub;
+                try {
+                    let current_trip = await strapi.query('trip').findOne({ id: user.current_trip });
+                    hub = await strapi.query('hub').findOne({ id: current_trip.route.to });
+                } catch (error) {
+
+                    if (error.status == 404) {
+                        console.log(error)
+                        ctx.response.status = 500;
+                        let error_pack = {
+                            status: 500,
+                            message: 'There is no current_trip assigned to the conductor.'
+                        }
+                        return error_pack;
+
+                    }
+                }
+
+                let h_lat = hub.lat;
+                let h_lon = hub.long;
+
+                let bias = cos(lat + (h_lat - lat));
+
+                let l = convert(lat, lon, bias);
+                let x = l[0]
+                let y = l[1]
+
+                l = convert(h_lat, h_lon, bias);
+                let x1 = l[0]
+                let y1 = l[1]
+
+                let d = dist(x, y, x1, y1);
+
+                console.log('Distance to destinaton', d);
+
+                if (d > 2) {
+                    ctx.response.status = 406;
+                    ctx.response.error = 'Not Acceptable.'
+                    let error_pack = {
+                        status: 406,
+                        error: 'Not Acceptable.',
+                        message: 'You should be within your destination hub limits to end trip.'
+                    }
+                    return error_pack;
+                }
+
+
                 let entity;
                 try {
                     entity = await strapi.services.trip.update({ id: user.current_trip }, { status: 'completed' });

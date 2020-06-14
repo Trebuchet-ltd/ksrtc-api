@@ -9,7 +9,7 @@
       }
     },
     {
-      "method": "GET",
+      "method": "POST",
       "path": "/trips/endCurrentTrip",
       "handler": "trip.endCurrentTrip",
       "config": {

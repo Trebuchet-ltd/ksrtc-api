@@ -58,9 +58,9 @@
       }
     },
     "/trips/endCurrentTrip": {
-      "get": {
+      "post": {
         "deprecated": false,
-        "description": "",
+        "description": "Create a new record",
         "responses": {
           "200": {
             "description": "response",
@@ -111,7 +111,21 @@
         "tags": [
           "Trip"
         ],
-        "parameters": []
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/trips/{id}/nextStop": {
