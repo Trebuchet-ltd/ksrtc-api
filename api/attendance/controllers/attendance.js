@@ -74,7 +74,9 @@ module.exports = {
 
                 if (isNaN(d)) {
                     console.log('User', user.id)
-                    console.log('Hub', hub)
+                    console.log('Hub', hub.id)
+                    console.log(lat, lon, h_lat, h_lon)
+                    console.log(x, y, x1, y1);
                     throw 'Error in distance claclulation.';
                 }
 
