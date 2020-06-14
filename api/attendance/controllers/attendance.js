@@ -72,6 +72,12 @@ module.exports = {
 
                 console.log('Distance', d);
 
+                if (isNaN(d)) {
+                    console.log('User', user.id)
+                    console.log('Hub', hub)
+                    throw 'Error in distance claclulation.';
+                }
+
                 if (d > 2) {
                     ctx.response.status = 406;
                     ctx.response.error = 'Not Acceptable.'
