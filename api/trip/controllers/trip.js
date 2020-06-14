@@ -59,8 +59,26 @@ module.exports = {
                 ].services.jwt.getToken(ctx);
 
                 const user = ctx.state.user;
-                let entity = await strapi.services.trip.update({ id: user.current_trip }, { status: 'complete' });
 
+                let entity;
+                try {
+                    entity = await strapi.services.trip.update({ id: user.current_trip }, { status: 'completed' });
+                } catch (error) {
+
+                    if (error.status == 404) {
+                        console.log(error)
+                        ctx.response.status = 500;
+                        let error_pack = {
+                            status: 500,
+                            message: 'There is no current_trip assigned to the conductor.'
+                        }
+                        return error_pack;
+
+                    }
+                }
+
+
+                console.log('Trip', entity.id, 'completed.');
                 let data = {
                     user: id,
                     time: new Date(),
@@ -69,7 +87,13 @@ module.exports = {
 
                 strapi.query('attendance').create(data);
 
-                return entity;
+
+                let trips = await strapi.query('trip').find({
+                    conductor: id,
+                    status: 'not_started'
+                });
+
+                return trips;
 
             } catch (err) {
                 // It will be there!

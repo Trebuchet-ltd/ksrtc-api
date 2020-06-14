@@ -91,12 +91,12 @@ module.exports = {
 
                     strapi.query('attendance').create(data);
 
-                    let now = new Date()
-                    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+                    // let now = new Date()
+                    // let today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
                     let trips = await strapi.query('trip').find({
                         conductor: id,
-                        start_time_gte: today
+                        status: 'not_started'
                     });
 
                     // return sanitizeEntity(trips, { model: strapi.models.trip });
