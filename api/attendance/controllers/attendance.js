@@ -100,7 +100,7 @@ module.exports = {
                     let data = {
                         user: id,
                         time: new Date(),
-                        hub: user.hub
+                        hub: user.hub,
                     }
 
                     strapi.query('attendance').create(data);
@@ -108,10 +108,16 @@ module.exports = {
                     // let now = new Date()
                     // let today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
-                    let trips = await strapi.query('trip').find({
-                        conductor: id,
-                        status: 'not_started'
-                    });
+                    let query = { status_ne: 'completed' }
+
+                    // console.log(user.user_type)
+                    if (user.user_type === 'conductor') {
+                        query['conductor'] = id;
+                    } else {
+                        query['driver'] = id;
+                    }
+
+                    let trips = await strapi.query('trip').find(query);
 
                     // return sanitizeEntity(trips, { model: strapi.models.trip });
                     return trips;

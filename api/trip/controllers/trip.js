@@ -60,33 +60,29 @@ module.exports = {
 
                 const user = ctx.state.user;
 
-                let lat = ctx.request.body.lat;
-                let lon = ctx.request.body.lon;
-
-
-                if (!lat || !lon) {
-                    ctx.response.status = 400;
-                    ctx.response.error = 'Bad request.'
-                    let error_pack = {
-                        status: 400,
-                        error: 'Bad request.',
-                        message: 'Coordinates not supplied with the request. You should supply lat and lon.'
-                    }
-                    return error_pack;
-                }
-
-                lat = parseFloat(lat);
-                lon = parseFloat(lon);
-
-
-                let hub;
+                let hub, current_trip;
                 try {
-                    let current_trip = await strapi.query('trip').findOne({ id: user.current_trip });
+                    let query = { status: 'in_progress' }
+
+                    console.log(user.user_type)
+                    if (user.user_type === 'conductor') {
+                        query['conductor'] = id;
+                    } else {
+                        query['driver'] = id;
+                    }
+
+                    console.log(query)
+                    current_trip = await strapi.query('trip').findOne(query);
+                    // console.log(current_trip)
                     hub = await strapi.query('hub').findOne({ id: current_trip.route.to });
+                    
+                    if (!current_trip || !hub) {
+                        throw "No in_progress trip for conductor or no to hub."
+                    }
                 } catch (error) {
 
+                    console.log(error)
                     if (error.status == 404) {
-                        console.log(error)
                         ctx.response.status = 500;
                         let error_pack = {
                             status: 500,
@@ -96,6 +92,33 @@ module.exports = {
 
                     }
                 }
+
+                let lat, lon;
+
+                try {
+                    lat = current_trip.lat;
+                    lon = current_trip.long;
+
+                    if (!lat || !lon) {
+                        throw "No Lat Long in trip"
+                    }
+                } catch (error) {
+                    
+                    console.log(error)
+                    ctx.response.status = 400;
+                    ctx.response.error = 'Bad request.'
+                    let error_pack = {
+                        status: 400,
+                        error: 'Bad request.',
+                        message: 'Coordinates not found in the trip object.'
+                    }
+                    return error_pack;
+
+                }
+
+                lat = parseFloat(lat);
+                lon = parseFloat(lon);
+
 
                 let h_lat = hub.lat;
                 let h_lon = hub.long;
@@ -111,6 +134,8 @@ module.exports = {
                 let y1 = l[1]
 
                 let d = dist(x, y, x1, y1);
+
+                console.log(lat, lon, h_lat, h_lon);
 
                 console.log('Distance to destinaton', d);
 
@@ -128,7 +153,7 @@ module.exports = {
 
                 let entity;
                 try {
-                    entity = await strapi.services.trip.update({ id: user.current_trip }, { status: 'completed' });
+                    entity = await strapi.services.trip.update({ id: current_trip.id }, { status: 'completed' });
                 } catch (error) {
 
                     if (error.status == 404) {
@@ -153,11 +178,17 @@ module.exports = {
 
                 strapi.query('attendance').create(data);
 
+                let query = { status_ne: 'completed' }
 
-                let trips = await strapi.query('trip').find({
-                    conductor: id,
-                    status: 'not_started'
-                });
+                // console.log(user.user_type)
+                if (user.user_type === 'conductor') {
+                    query['conductor'] = id;
+                } else {
+                    query['driver'] = id;
+                }
+
+
+                let trips = await strapi.query('trip').find(query);
 
                 return trips;
 
