@@ -284,7 +284,7 @@ module.exports = {
                     query['conductor'] = id;
                     console.log(query)
                     current_trip = await strapi.query('trip').findOne(query);
-                    // console.log(current_trip
+                    console.log(current_trip)
                     if (!current_trip ) {
                       throw "No in_progress trip for conductor or  hub."
                     }
@@ -299,7 +299,6 @@ module.exports = {
                       return error_pack;
                     }
                   }
-
 
 
                   try {
