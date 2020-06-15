@@ -49,6 +49,8 @@ module.exports = {
                 let lat = ctx.request.body.lat;
                 let lon = ctx.request.body.lon;
 
+                console.log('Body', ctx.request.body);
+
                 lat = parseFloat(lat);
                 lon = parseFloat(lon);
 
