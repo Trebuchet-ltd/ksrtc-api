@@ -9,7 +9,8 @@
         "srv": false,
         "port": 27017,
         "username": "${process.env.MONGO_USER || ''}",
-        "password": "${process.env.MONGO_PWD || ''}"
+        "password": "${process.env.MONGO_PWD || ''}",
+        "timezone":"Indian/Mahe"
       },
       "options": {
         "authenticationDatabase": ""
