@@ -277,14 +277,16 @@ module.exports = {
                 let lat, lon;
                 const user = ctx.state.user;
                 if(!keyInObj('lat', update)){
-
+                  const { iduser, isAdmin = false } = await strapi.plugins[
+                    'users-permissions'
+                    ].services.jwt.getToken(ctx);
                   try {
-                    let query = {  }
+                    let query = { status: 'in_progress' }
                     console.log(user.user_type)
-                    query['conductor'] = id;
+                    query['conductor'] = iduser;
                     console.log(query)
                     current_trip = await strapi.query('trip').findOne(query);
-                    console.log(current_trip)
+                    // console.log(current_trip
                     if (!current_trip ) {
                       throw "No in_progress trip for conductor or  hub."
                     }
@@ -299,6 +301,7 @@ module.exports = {
                       return error_pack;
                     }
                   }
+
 
 
                   try {
