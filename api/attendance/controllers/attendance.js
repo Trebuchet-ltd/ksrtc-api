@@ -47,15 +47,13 @@ module.exports = {
 
 
                 let body = ctx.request.body;
-                if (typeof(ctx.request.body) === 'string') {
+                if (typeof (ctx.request.body) === 'string') {
                     body = JSON.parse(ctx.request.body)
+                    console.log('Body type', typeof (ctx.request.body));
                 }
-                
+
                 let lat = body['lat'];
                 let lon = body['lon'];
-
-                console.log('Body', ctx.request.body);
-                console.log('Body type', typeof(ctx.request.body));
 
                 lat = parseFloat(lat);
                 lon = parseFloat(lon);
