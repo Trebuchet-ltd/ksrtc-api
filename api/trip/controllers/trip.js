@@ -275,6 +275,7 @@ module.exports = {
                 console.log(ctx.request.body);
                 let hub, current_trip;
                 let lat, lon;
+                const user = ctx.state.user;
                 if(!keyInObj('lat', update)){
 
                   try {
