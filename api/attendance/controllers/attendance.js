@@ -46,8 +46,8 @@ module.exports = {
                 const user = ctx.state.user;
 
 
-                let lat = ctx.request.body.lat;
-                let lon = ctx.request.body.lon;
+                let lat = ctx.request.body['lat'];
+                let lon = ctx.request.body['lon'];
 
                 console.log('Body', ctx.request.body);
 
