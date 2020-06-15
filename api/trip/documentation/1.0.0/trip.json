@@ -1014,6 +1014,12 @@
               },
               "current_trip": {
                 "type": "string"
+              },
+              "trips_driver": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -1166,6 +1172,63 @@
               "in_progress",
               "completed"
             ]
+          },
+          "driver": {
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "trips": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "hub": {
+                "type": "string"
+              },
+              "user_type": {
+                "type": "string"
+              },
+              "current_trip": {
+                "type": "string"
+              },
+              "trips_driver": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1221,6 +1284,9 @@
               "in_progress",
               "completed"
             ]
+          },
+          "driver": {
+            "type": "string"
           }
         }
       }

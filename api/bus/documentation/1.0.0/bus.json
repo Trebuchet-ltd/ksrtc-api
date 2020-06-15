@@ -577,6 +577,9 @@
               },
               "status": {
                 "type": "string"
+              },
+              "driver": {
+                "type": "string"
               }
             }
           },
@@ -633,6 +636,9 @@
                   "type": "integer"
                 },
                 "status": {
+                  "type": "string"
+                },
+                "driver": {
                   "type": "string"
                 }
               }

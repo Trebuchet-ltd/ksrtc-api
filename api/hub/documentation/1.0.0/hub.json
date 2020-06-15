@@ -588,6 +588,9 @@
                 },
                 "status": {
                   "type": "string"
+                },
+                "driver": {
+                  "type": "string"
                 }
               }
             }
@@ -671,6 +674,12 @@
                 },
                 "current_trip": {
                   "type": "string"
+                },
+                "trips_driver": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }

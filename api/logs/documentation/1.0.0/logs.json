@@ -577,6 +577,9 @@
               },
               "status": {
                 "type": "string"
+              },
+              "driver": {
+                "type": "string"
               }
             }
           },

@@ -23,10 +23,10 @@
       "type": "string"
     },
     "conductor": {
-      "columnName": "Conductor",
+      "via": "trips",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "trips"
+      "columnName": "Conductor",
+      "model": "user"
     },
     "lat": {
       "type": "float"
@@ -64,6 +64,11 @@
         "completed"
       ],
       "default": "not_started"
+    },
+    "driver": {
+      "via": "trips_driver",
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }

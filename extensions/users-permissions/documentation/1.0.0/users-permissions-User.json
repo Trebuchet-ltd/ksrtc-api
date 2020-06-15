@@ -1299,6 +1299,9 @@
                 },
                 "status": {
                   "type": "string"
+                },
+                "driver": {
+                  "type": "string"
                 }
               }
             }
@@ -1416,6 +1419,70 @@
               },
               "status": {
                 "type": "string"
+              },
+              "driver": {
+                "type": "string"
+              }
+            }
+          },
+          "trips_driver": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "start_time": {
+                  "type": "datetime"
+                },
+                "end_time": {
+                  "type": "datetime"
+                },
+                "bus": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "conductor": {
+                  "type": "string"
+                },
+                "lat": {
+                  "type": "number"
+                },
+                "long": {
+                  "type": "number"
+                },
+                "route": {
+                  "type": "string"
+                },
+                "next_stop": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                },
+                "hub": {
+                  "type": "string"
+                },
+                "number_of_passengers": {
+                  "type": "integer"
+                },
+                "total_collection": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "driver": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -1476,6 +1543,12 @@
           },
           "current_trip": {
             "type": "string"
+          },
+          "trips_driver": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }

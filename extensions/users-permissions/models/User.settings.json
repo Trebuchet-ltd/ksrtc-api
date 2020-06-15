@@ -54,13 +54,13 @@
       "configurable": false
     },
     "trips": {
-      "via": "conductor",
       "columnName": "Trip",
-      "collection": "trip"
+      "collection": "trip",
+      "via": "conductor"
     },
     "hub": {
-      "via": "conductors",
-      "model": "hub"
+      "model": "hub",
+      "via": "conductors"
     },
     "user_type": {
       "type": "enumeration",
@@ -73,6 +73,10 @@
     },
     "current_trip": {
       "model": "trip"
+    },
+    "trips_driver": {
+      "collection": "trip",
+      "via": "driver"
     }
   }
 }
