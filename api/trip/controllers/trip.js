@@ -279,7 +279,7 @@ module.exports = {
                 if(!keyInObj('lat', update)){
 
                   try {
-                    let query = { status: 'in_progress' }
+                    let query = {  }
                     console.log(user.user_type)
                     query['conductor'] = id;
                     console.log(query)
