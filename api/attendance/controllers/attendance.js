@@ -50,6 +50,7 @@ module.exports = {
                 let lon = ctx.request.body['lon'];
 
                 console.log('Body', ctx.request.body);
+                console.log('Body type', typeof(ctx.request.body));
 
                 lat = parseFloat(lat);
                 lon = parseFloat(lon);
