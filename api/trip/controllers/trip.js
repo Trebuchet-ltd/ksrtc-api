@@ -75,7 +75,7 @@ module.exports = {
                     current_trip = await strapi.query('trip').findOne(query);
                     // console.log(current_trip)
                     hub = await strapi.query('hub').findOne({ id: current_trip.route.to });
-                    
+
                     if (!current_trip || !hub) {
                         throw "No in_progress trip for conductor or no to hub."
                     }
@@ -103,7 +103,7 @@ module.exports = {
                         throw "No Lat Long in trip"
                     }
                 } catch (error) {
-                    
+
                     console.log(error)
                     ctx.response.status = 400;
                     ctx.response.error = 'Bad request.'
@@ -139,16 +139,16 @@ module.exports = {
 
                 console.log('Distance to destinaton', d);
 
-                if (d > 2) {
-                    ctx.response.status = 406;
-                    ctx.response.error = 'Not Acceptable.'
-                    let error_pack = {
-                        status: 406,
-                        error: 'Not Acceptable.',
-                        message: 'You should be within your destination hub limits to end trip.'
-                    }
-                    return error_pack;
-                }
+                // if (d > 2) {
+                //     ctx.response.status = 406;
+                //     ctx.response.error = 'Not Acceptable.'
+                //     let error_pack = {
+                //         status: 406,
+                //         error: 'Not Acceptable.',
+                //         message: 'You should be within your destination hub limits to end trip.'
+                //     }
+                //     return error_pack;
+                // }
 
 
                 let entity;
@@ -269,12 +269,69 @@ module.exports = {
             let prev = entity.next_stop;
             let ids = entity.route.stops.map((s) => { return s._id.toString() });
             let index = ids.indexOf(prev.id);
+            let update = ctx.request.body
             if (!keyInObj('lat', prev) || !keyInObj('long', prev)) {
                 console.log('Adding location to stop: ', prev.name)
                 console.log(ctx.request.body);
+                let hub, current_trip;
+                let lat, lon;
+                if(!keyInObj('lat', update)){
+
+                  try {
+                    let query = { status: 'in_progress' }
+                    console.log(user.user_type)
+                    query['conductor'] = id;
+                    console.log(query)
+                    current_trip = await strapi.query('trip').findOne(query);
+                    // console.log(current_trip
+                    if (!current_trip ) {
+                      throw "No in_progress trip for conductor or  hub."
+                    }
+                  } catch (error) {
+                    console.log(error)
+                    if (error.status == 404) {
+                      ctx.response.status = 500;
+                      let error_pack = {
+                        status: 500,
+                        message: 'There is no current_trip assigned to the conductor.'
+                      }
+                      return error_pack;
+                    }
+                  }
+
+
+
+                  try {
+                    lat = current_trip.lat;
+                    lon = current_trip.long;
+
+                    if (!lat || !lon) {
+                      throw "No Lat Long in trip"
+                    }
+                  } catch (error) {
+
+                    console.log(error)
+                    ctx.response.status = 400;
+                    ctx.response.error = 'Bad request.'
+                    let error_pack = {
+                      status: 400,
+                      error: 'Bad request.',
+                      message: 'Coordinates not found in the trip object.'
+                    }
+                    return error_pack;
+
+                  }
+
+                  lat = parseFloat(lat);
+                  lon = parseFloat(lon);
+                  update = {
+                    'lat':lat,
+                    'long':lon
+                  }
+                }
                 strapi.query('hub').update(
                     { id: prev.id },
-                    ctx.request.body
+                    update
                 );
             }
             index = (index + 1 >= entity.route.stops.length) ? entity.route.stops.length - 1 : index + 1;
