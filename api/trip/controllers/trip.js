@@ -31,6 +31,35 @@ function dist(x, y, x1, y1) {
 }
 
 
+function getDistance(lat, lon, h_lat, h_lon) {
+
+    lat = parseFloat(lat);
+    lon = parseFloat(lon);
+
+    let bias = cos(lat + (h_lat - lat));
+
+    let l = convert(lat, lon, bias);
+    let x = l[0]
+    let y = l[1]
+
+    l = convert(h_lat, h_lon, bias);
+    let x1 = l[0]
+    let y1 = l[1]
+
+    let d = dist(x, y, x1, y1);
+
+    console.log('Distance', d);
+
+
+    if (isNaN(d)) {
+        console.log(lat, lon, h_lat, h_lon)
+        console.log(x, y, x1, y1);
+        throw 'Error in distance claclulation.';
+    }
+
+    return d;
+}
+
 function getParams(lat, lon, radius) {
     radius = parseFloat(radius);
     const params = {
@@ -61,113 +90,44 @@ module.exports = {
                 const user = ctx.state.user;
 
                 let hub, current_trip;
-                try {
-                    let query = { status: 'in_progress' }
 
-                    console.log(user.user_type)
-                    if (user.user_type === 'conductor') {
-                        query['conductor'] = id;
-                    } else {
-                        query['driver'] = id;
-                    }
+                let query = { status: 'in_progress' }
+                query[user.user_type] = id;
+                console.log(query)
 
-                    console.log(query)
-                    current_trip = await strapi.query('trip').findOne(query);
-                    // console.log(current_trip)
-                    hub = await strapi.query('hub').findOne({ id: current_trip.route.to });
+                current_trip = await strapi.query('trip').findOne(query);
+                // console.log(current_trip)
 
-                    if (!current_trip || !hub) {
-                        throw "No in_progress trip for conductor or no to hub."
-                    }
-                } catch (error) {
+                hub = await strapi.query('hub').findOne({ id: current_trip.route.to });
 
-                    console.log(error)
-                    if (error.status == 404) {
-                        ctx.response.status = 500;
-                        let error_pack = {
-                            status: 500,
-                            message: 'There is no current_trip assigned to the conductor.'
-                        }
-                        return error_pack;
+                if (!current_trip || !hub)
+                    throw "No in_progress trip for conductor or no to hub."
 
-                    }
-                }
 
-                let lat, lon;
+                let lat = current_trip.lat;
+                let lon = current_trip.long;
 
-                try {
-                    lat = current_trip.lat;
-                    lon = current_trip.long;
+                if (!keyInObj(lat) || !keyInObj(lon))
+                    throw "Coordinates not found in the trip object."
 
-                    if (!lat || !lon) {
-                        throw "No Lat Long in trip"
-                    }
-                } catch (error) {
 
-                    console.log(error)
-                    ctx.response.status = 400;
-                    ctx.response.error = 'Bad request.'
+                let d = getDistance(lat, lon, h_lat, h_lon);
+
+                if (d > 2) {
+                    console.log('User location:', lat, lon);
+                    console.log('Hub location:', h_lat, h_lon);
+                    ctx.response.status = 406;
+                    ctx.response.error = 'Not Acceptable.'
                     let error_pack = {
-                        status: 400,
-                        error: 'Bad request.',
-                        message: 'Coordinates not found in the trip object.'
+                        status: 406,
+                        error: 'Not Acceptable.',
+                        message: 'You should be within your destination hub limits to end trip.'
                     }
                     return error_pack;
-
                 }
 
-                lat = parseFloat(lat);
-                lon = parseFloat(lon);
 
-
-                let h_lat = hub.lat;
-                let h_lon = hub.long;
-
-                let bias = cos(lat + (h_lat - lat));
-
-                let l = convert(lat, lon, bias);
-                let x = l[0]
-                let y = l[1]
-
-                l = convert(h_lat, h_lon, bias);
-                let x1 = l[0]
-                let y1 = l[1]
-
-                let d = dist(x, y, x1, y1);
-
-                console.log(lat, lon, h_lat, h_lon);
-
-                console.log('Distance to destinaton', d);
-
-                // if (d > 2) {
-                //     ctx.response.status = 406;
-                //     ctx.response.error = 'Not Acceptable.'
-                //     let error_pack = {
-                //         status: 406,
-                //         error: 'Not Acceptable.',
-                //         message: 'You should be within your destination hub limits to end trip.'
-                //     }
-                //     return error_pack;
-                // }
-
-
-                let entity;
-                try {
-                    entity = await strapi.services.trip.update({ id: current_trip.id }, { status: 'completed' });
-                } catch (error) {
-
-                    if (error.status == 404) {
-                        console.log(error)
-                        ctx.response.status = 500;
-                        let error_pack = {
-                            status: 500,
-                            message: 'There is no current_trip assigned to the conductor.'
-                        }
-                        return error_pack;
-
-                    }
-                }
-
+                let entity = await strapi.services.trip.update({ id: current_trip.id }, { status: 'completed' });
 
                 console.log('Trip', entity.id, 'completed.');
                 let data = {
@@ -178,7 +138,7 @@ module.exports = {
 
                 strapi.query('attendance').create(data);
 
-                let query = { status_ne: 'completed' }
+                query = { status_ne: 'completed' }
 
                 // console.log(user.user_type)
                 if (user.user_type === 'conductor') {
@@ -193,11 +153,12 @@ module.exports = {
                 return trips;
 
             } catch (err) {
-                // It will be there!
-                console.log(err)
+                // TODO: send less info for security.
+                console.error(err)
                 ctx.response.status = 500;
                 let error_pack = {
-                    status: 500
+                    status: 500,
+                    message: err
                 }
                 return error_pack;
 
@@ -228,23 +189,18 @@ module.exports = {
                 files,
             });
 
-            data['action'] = 'update';
-            data['time'] = new Date();
-            data['trip'] = entity.id;
-            strapi.query('logs').create(data);
-
-
         } else {
             entity = await strapi.services.trip.update({ id }, ctx.request.body);
-
-            let data = ctx.request.body;
-            data['action'] = 'update';
-            data['time'] = new Date();
-            data['trip'] = entity.id;
-            data['next_stop'] = entity.next_stop;
-            data['number_of_passengers'] = entity.number_of_passengers;
-            strapi.query('logs').create(data);
         }
+
+        let data = ctx.request.body;
+        data['action'] = 'update';
+        data['time'] = new Date();
+        data['trip'] = entity.id;
+        data['next_stop'] = entity.next_stop;
+        data['number_of_passengers'] = entity.number_of_passengers;
+        strapi.query('logs').create(data);
+
 
         return sanitizeEntity(entity, { model: strapi.models.trip });
     },
@@ -276,59 +232,59 @@ module.exports = {
                 let hub, current_trip;
                 let lat, lon;
                 const user = ctx.state.user;
-                if(!keyInObj('lat', update)){
+                if (!keyInObj('lat', update)) {
 
-                  try {
-                    let query = { status: 'in_progress' }
-                    console.log(user.user_type)
-                    query['conductor'] = user.id;
-                    console.log(query)
-                    current_trip = await strapi.query('trip').findOne(query);
-                    // console.log(current_trip
-                    if (!current_trip ) {
-                      throw "No in_progress trip for conductor or  hub."
+                    try {
+                        let query = { status: 'in_progress' }
+                        console.log(user.user_type)
+                        query['conductor'] = user.id;
+                        console.log(query)
+                        current_trip = await strapi.query('trip').findOne(query);
+                        // console.log(current_trip
+                        if (!current_trip) {
+                            throw "No in_progress trip for conductor or  hub."
+                        }
+                    } catch (error) {
+                        console.log(error)
+                        if (error.status == 404) {
+                            ctx.response.status = 500;
+                            let error_pack = {
+                                status: 500,
+                                message: 'There is no current_trip assigned to the conductor.'
+                            }
+                            return error_pack;
+                        }
                     }
-                  } catch (error) {
-                    console.log(error)
-                    if (error.status == 404) {
-                      ctx.response.status = 500;
-                      let error_pack = {
-                        status: 500,
-                        message: 'There is no current_trip assigned to the conductor.'
-                      }
-                      return error_pack;
+
+
+
+                    try {
+                        lat = current_trip.lat;
+                        lon = current_trip.long;
+
+                        if (!lat || !lon) {
+                            throw "No Lat Long in trip"
+                        }
+                    } catch (error) {
+
+                        console.log(error)
+                        ctx.response.status = 400;
+                        ctx.response.error = 'Bad request.'
+                        let error_pack = {
+                            status: 400,
+                            error: 'Bad request.',
+                            message: 'Coordinates not found in the trip object.'
+                        }
+                        return error_pack;
+
                     }
-                  }
 
-
-
-                  try {
-                    lat = current_trip.lat;
-                    lon = current_trip.long;
-
-                    if (!lat || !lon) {
-                      throw "No Lat Long in trip"
+                    lat = parseFloat(lat);
+                    lon = parseFloat(lon);
+                    update = {
+                        'lat': lat,
+                        'long': lon
                     }
-                  } catch (error) {
-
-                    console.log(error)
-                    ctx.response.status = 400;
-                    ctx.response.error = 'Bad request.'
-                    let error_pack = {
-                      status: 400,
-                      error: 'Bad request.',
-                      message: 'Coordinates not found in the trip object.'
-                    }
-                    return error_pack;
-
-                  }
-
-                  lat = parseFloat(lat);
-                  lon = parseFloat(lon);
-                  update = {
-                    'lat':lat,
-                    'long':lon
-                  }
                 }
                 strapi.query('hub').update(
                     { id: prev.id },
