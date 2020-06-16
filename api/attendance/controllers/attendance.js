@@ -86,16 +86,17 @@ module.exports = {
                     throw 'Error in distance claclulation.';
                 }
 
-                if (d > 2) {
-                    ctx.response.status = 406;
-                    ctx.response.error = 'Not Acceptable.'
-                    let error_pack = {
-                        status: 406,
-                        error: 'Not Acceptable.',
-                        message: 'You should be within your hub limits to check in.'
-                    }
-                    return error_pack;
-                } else {
+                // if (d > 2) {
+                //     ctx.response.status = 406;
+                //     ctx.response.error = 'Not Acceptable.'
+                //     let error_pack = {
+                //         status: 406,
+                //         error: 'Not Acceptable.',
+                //         message: 'You should be within your hub limits to check in.'
+                //     }
+                //     return error_pack;
+                // }
+                // else {
 
                     let data = {
                         user: id,
@@ -122,7 +123,7 @@ module.exports = {
                     // return sanitizeEntity(trips, { model: strapi.models.trip });
                     return trips;
 
-                }
+                // }
 
 
             } catch (err) {
