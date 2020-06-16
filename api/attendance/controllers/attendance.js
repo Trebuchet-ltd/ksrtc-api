@@ -33,6 +33,35 @@ function dist(x, y, x1, y1) {
 }
 
 
+function getDistance(lat, lon, h_lat, h_lon) {
+
+    lat = parseFloat(lat);
+    lon = parseFloat(lon);
+
+    let bias = cos(lat + (h_lat - lat));
+
+    let l = convert(lat, lon, bias);
+    let x = l[0]
+    let y = l[1]
+
+    l = convert(h_lat, h_lon, bias);
+    let x1 = l[0]
+    let y1 = l[1]
+
+    let d = dist(x, y, x1, y1);
+
+    console.log('Distance', d);
+
+
+    if (isNaN(d)) {
+        console.log(lat, lon, h_lat, h_lon)
+        console.log(x, y, x1, y1);
+        throw 'Error in distance claclulation.';
+    }
+
+    return d;
+}
+
 module.exports = {
 
     async checkin(ctx) {
@@ -43,95 +72,68 @@ module.exports = {
                     'users-permissions'
                 ].services.jwt.getToken(ctx);
 
+                // The Authenticated user from the JWT.
                 const user = ctx.state.user;
 
 
+                // The POST data.
                 let body = ctx.request.body;
+                // Handling for alternate content-types of the POST data.
                 if (typeof (ctx.request.body) === 'string') {
                     body = JSON.parse(ctx.request.body)
-                    console.log('Body type', typeof (ctx.request.body));
                 }
 
+                // Location validation for Checking In. User should be within the hub limits.
                 let lat = body['lat'];
                 let lon = body['lon'];
-
-                lat = parseFloat(lat);
-                lon = parseFloat(lon);
-
 
                 let hub = await strapi.query('hub').findOne({ id: user.hub });
 
                 let h_lat = hub.lat;
                 let h_lon = hub.long;
 
-                let bias = cos(lat + (h_lat - lat));
+                let d = getDistance(lat, lon, h_lat, h_lon);
 
-                let l = convert(lat, lon, bias);
-                let x = l[0]
-                let y = l[1]
-
-                l = convert(h_lat, h_lon, bias);
-                let x1 = l[0]
-                let y1 = l[1]
-
-                let d = dist(x, y, x1, y1);
-
-                console.log('Distance', d);
-
-                if (isNaN(d)) {
-                    console.log('User', user.id)
-                    console.log('Hub', hub.id)
-                    console.log(lat, lon, h_lat, h_lon)
-                    console.log(x, y, x1, y1);
-                    throw 'Error in distance claclulation.';
+                if (d > 2) {
+                    console.log('User location:', lat, lon);
+                    console.log('Hub location:', h_lat, h_lon);
+                    ctx.response.status = 406;
+                    ctx.response.error = 'Not Acceptable.'
+                    let error_pack = {
+                        status: 406,
+                        error: 'Not Acceptable.',
+                        message: 'You should be within your hub limits to check in.'
+                    }
+                    return error_pack;
                 }
 
-                // if (d > 2) {
-                //     ctx.response.status = 406;
-                //     ctx.response.error = 'Not Acceptable.'
-                //     let error_pack = {
-                //         status: 406,
-                //         error: 'Not Acceptable.',
-                //         message: 'You should be within your hub limits to check in.'
-                //     }
-                //     return error_pack;
-                // }
-                // else {
 
-                    let data = {
-                        user: id,
-                        time: new Date(),
-                        hub: user.hub,
-                    }
+                // Adding the record to the attendace register.
+                strapi.query('attendance').create({
+                    user: id,
+                    time: new Date(),
+                    hub: user.hub,
+                });
 
-                    strapi.query('attendance').create(data);
 
-                    // let now = new Date()
-                    // let today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+                // Creating the query to find the trips associated with the conductor / driver.
+                let query = { status_ne: 'completed' }
+                query[user.user_type] = id;
 
-                    let query = { status_ne: 'completed' }
 
-                    // console.log(user.user_type)
-                    if (user.user_type === 'conductor') {
-                        query['conductor'] = id;
-                    } else {
-                        query['driver'] = id;
-                    }
+                // Returning a list of the remaining trips of the day.
+                let trips = await strapi.query('trip').find(query);
 
-                    let trips = await strapi.query('trip').find(query);
-
-                    // return sanitizeEntity(trips, { model: strapi.models.trip });
-                    return trips;
-
-                // }
-
+                // return sanitizeEntity(trips, { model: strapi.models.trip });
+                return trips;
 
             } catch (err) {
-                // It will be there!
+                // TODO: Decrease the amount of DATA given for security reasons.
                 console.log(err)
                 ctx.response.status = 500;
                 let error_pack = {
-                    status: 500
+                    status: 500,
+                    message: err
                 }
                 return error_pack;
 
