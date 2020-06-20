@@ -95,9 +95,7 @@ module.exports = {
         let query = { status: 'in_progress' }
         query[user.user_type] = user.id;
 
-        console.log('Query for Current trip', query)
         let current_trip = await strapi.query('trip').findOne(query);
-        console.log('Current trip:', current_trip);
         let hub = await strapi.query('hub').findOne({ id: current_trip.route.to });
 
 
