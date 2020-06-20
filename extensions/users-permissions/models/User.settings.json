@@ -54,9 +54,9 @@
       "configurable": false
     },
     "trips": {
+      "via": "conductor",
       "columnName": "Trip",
-      "collection": "trip",
-      "via": "conductor"
+      "collection": "trip"
     },
     "hub": {
       "model": "hub",
@@ -75,8 +75,8 @@
       "model": "trip"
     },
     "trips_driver": {
-      "collection": "trip",
-      "via": "driver"
+      "via": "driver",
+      "collection": "trip"
     }
   }
 }

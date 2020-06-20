@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/15/2020 6:16:39 PM"
+    "x-generation-date": "06/20/2020 10:55:49 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6584,6 +6584,12 @@
               },
               "driver": {
                 "type": "string"
+              },
+              "conductor_status": {
+                "type": "string"
+              },
+              "driver_status": {
+                "type": "string"
               }
             }
           },
@@ -6643,6 +6649,12 @@
                   "type": "string"
                 },
                 "driver": {
+                  "type": "string"
+                },
+                "conductor_status": {
+                  "type": "string"
+                },
+                "driver_status": {
                   "type": "string"
                 }
               }
@@ -6805,6 +6817,12 @@
                   "type": "string"
                 },
                 "driver": {
+                  "type": "string"
+                },
+                "conductor_status": {
+                  "type": "string"
+                },
+                "driver_status": {
                   "type": "string"
                 }
               }
@@ -7047,6 +7065,12 @@
                 "type": "string"
               },
               "driver": {
+                "type": "string"
+              },
+              "conductor_status": {
+                "type": "string"
+              },
+              "driver_status": {
                 "type": "string"
               }
             }
@@ -7746,6 +7770,22 @@
                 }
               }
             }
+          },
+          "conductor_status": {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "start_ready",
+              "end_ready"
+            ]
+          },
+          "driver_status": {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "start_ready",
+              "end_ready"
+            ]
           }
         }
       },
@@ -7804,6 +7844,22 @@
           },
           "driver": {
             "type": "string"
+          },
+          "conductor_status": {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "start_ready",
+              "end_ready"
+            ]
+          },
+          "driver_status": {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "start_ready",
+              "end_ready"
+            ]
           }
         }
       },
@@ -8070,6 +8126,12 @@
                 },
                 "driver": {
                   "type": "string"
+                },
+                "conductor_status": {
+                  "type": "string"
+                },
+                "driver_status": {
+                  "type": "string"
                 }
               }
             }
@@ -8190,6 +8252,12 @@
               },
               "driver": {
                 "type": "string"
+              },
+              "conductor_status": {
+                "type": "string"
+              },
+              "driver_status": {
+                "type": "string"
               }
             }
           },
@@ -8249,6 +8317,12 @@
                   "type": "string"
                 },
                 "driver": {
+                  "type": "string"
+                },
+                "conductor_status": {
+                  "type": "string"
+                },
+                "driver_status": {
                   "type": "string"
                 }
               }

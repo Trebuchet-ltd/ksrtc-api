@@ -1229,6 +1229,22 @@
                 }
               }
             }
+          },
+          "conductor_status": {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "start_ready",
+              "end_ready"
+            ]
+          },
+          "driver_status": {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "start_ready",
+              "end_ready"
+            ]
           }
         }
       },
@@ -1287,6 +1303,22 @@
           },
           "driver": {
             "type": "string"
+          },
+          "conductor_status": {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "start_ready",
+              "end_ready"
+            ]
+          },
+          "driver_status": {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "start_ready",
+              "end_ready"
+            ]
           }
         }
       }

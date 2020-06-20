@@ -23,10 +23,10 @@
       "type": "string"
     },
     "conductor": {
-      "via": "trips",
-      "plugin": "users-permissions",
       "columnName": "Conductor",
-      "model": "user"
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "trips"
     },
     "lat": {
       "type": "float"
@@ -66,9 +66,25 @@
       "default": "not_started"
     },
     "driver": {
-      "via": "trips_driver",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "trips_driver"
+    },
+    "conductor_status": {
+      "type": "enumeration",
+      "enum": [
+        "not_started",
+        "start_ready",
+        "end_ready"
+      ]
+    },
+    "driver_status": {
+      "type": "enumeration",
+      "enum": [
+        "not_started",
+        "start_ready",
+        "end_ready"
+      ]
     }
   }
 }

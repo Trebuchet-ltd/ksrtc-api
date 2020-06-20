@@ -580,6 +580,12 @@
               },
               "driver": {
                 "type": "string"
+              },
+              "conductor_status": {
+                "type": "string"
+              },
+              "driver_status": {
+                "type": "string"
               }
             }
           },
