@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/20/2020 10:55:49 AM"
+    "x-generation-date": "06/20/2020 7:40:03 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -7773,6 +7773,7 @@
           },
           "conductor_status": {
             "type": "string",
+            "default": "not_started",
             "enum": [
               "not_started",
               "start_ready",
@@ -7781,6 +7782,7 @@
           },
           "driver_status": {
             "type": "string",
+            "default": "not_started",
             "enum": [
               "not_started",
               "start_ready",
@@ -7847,6 +7849,7 @@
           },
           "conductor_status": {
             "type": "string",
+            "default": "not_started",
             "enum": [
               "not_started",
               "start_ready",
@@ -7855,6 +7858,7 @@
           },
           "driver_status": {
             "type": "string",
+            "default": "not_started",
             "enum": [
               "not_started",
               "start_ready",

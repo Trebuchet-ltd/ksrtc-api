@@ -76,7 +76,8 @@
         "not_started",
         "start_ready",
         "end_ready"
-      ]
+      ],
+      "default": "not_started"
     },
     "driver_status": {
       "type": "enumeration",
@@ -84,7 +85,8 @@
         "not_started",
         "start_ready",
         "end_ready"
-      ]
+      ],
+      "default": "not_started"
     }
   }
 }

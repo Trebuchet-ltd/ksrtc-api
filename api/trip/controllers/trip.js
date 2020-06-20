@@ -30,6 +30,43 @@ function dist(x, y, x1, y1) {
     return d;
 }
 
+function getNearParams(lat, lon, lat_d, lon_d){
+    
+    lat = parseFloat(lat);
+    lon = parseFloat(lon);
+    lat_d = parseFloat(lat_d);
+    lon_d = parseFloat(lon_d);
+
+    let lat_offset = lat + lat_d;
+    let lon_offset = lon + lon_d;
+
+    let bias = Math.cos(lat);
+
+    let l = convert(lat, lon, bias);
+    let x = l[0]
+    let y = l[1]
+
+    l = convert(lat_offset, lon, bias);
+    let x1 = l[0]
+    let y1 = l[1]
+
+    let h_d = dist(x, y, x1, y1);
+
+    l = convert(lat, lon, bias);
+    x = l[0]
+    y = l[1]
+
+    l = convert(lat, lon_offset, bias);
+    x1 = l[0]
+    y1 = l[1]
+
+    let v_d = dist(x, y, x1, y1);
+
+
+    let radius = (v_d > h_d) ? v_d : h_d;
+
+    return getParams(lat, lon, radius);
+}
 
 function getDistance(lat, lon, h_lat, h_lon) {
 
@@ -83,6 +120,21 @@ function handleError(ctx, error, status = 500, message = 'Internal Server Error'
 
 module.exports = {
 
+    async update(ctx) {
+        const { id } = ctx.params;
+
+        let entity;
+        if (ctx.is('multipart')) {
+            const { data, files } = parseMultipartData(ctx);
+            entity = await strapi.services.trip.update({ id }, data, {
+                files,
+            });
+        } else {
+            entity = await strapi.services.trip.update({ id }, ctx.request.body);
+        }
+
+        return sanitizeEntity(entity, { model: strapi.models.trip });
+    },
 
     async endCurrentTrip(ctx) {
 
@@ -96,11 +148,16 @@ module.exports = {
         query[user.user_type] = user.id;
 
         let current_trip = await strapi.query('trip').findOne(query);
+
+        if (!current_trip)
+            return handleError(ctx, null, 404, "No in_progress trip found for the user.");
+
+
         let hub = await strapi.query('hub').findOne({ id: current_trip.route.to });
 
 
-        if (!current_trip || !hub)
-            return handleError(ctx, null, 404, "No in_progress trip found for the user or no to hub.");
+        if (!hub)
+            return handleError(ctx, null, 404, "No destination hub found.");
 
 
         if (!keyInObj('lat', current_trip) || !keyInObj('long', current_trip))
@@ -274,55 +331,18 @@ module.exports = {
 
     async near(ctx) {
         let { lat, lon, lat_d, lon_d } = ctx.query;
-        if (!lat || !lon || !lat_d || !lon_d) {
-            ctx.response.status = 400;
-            ctx.response.error = 'Bad request.'
-            let error_pack = {
-                status: 400,
-                error: 'Bad request.',
-                message: 'Coordinates not supplied with the request. You should supply lat, lon, lat_d and lon_d.'
-            }
-            return error_pack;
-        }
-        lat = parseFloat(lat);
-        lon = parseFloat(lon);
-        lat_d = parseFloat(lat_d);
-        lon_d = parseFloat(lon_d);
+        if (!lat || !lon || !lat_d || !lon_d) 
+            return handleError(ctx, null, 400, 'Coordinates not supplied with the request. You should supply lat, lon, lat_d and lon_d.');
 
-        let lat_offset = lat + lat_d;
-        let lon_offset = lon + lon_d;
+        let params = getNearParams(lat, lon, lat_d, lon_d);
+        let trips = await strapi.query('trip').find({ lat_gt: params.minLat, lat_lt: params.maxLat, long_gt: params.minLon, long_lt: params.maxLon });
+        let hubs = await strapi.query('hub').find({ lat_gt: params.minLat, lat_lt: params.maxLat, long_gt: params.minLon, long_lt: params.maxLon });
 
-        let bias = Math.cos(lat);
-
-        let l = convert(lat, lon, bias);
-        let x = l[0]
-        let y = l[1]
-
-        l = convert(lat_offset, lon, bias);
-        let x1 = l[0]
-        let y1 = l[1]
-
-        let h_d = dist(x, y, x1, y1);
-
-        l = convert(lat, lon, bias);
-        x = l[0]
-        y = l[1]
-
-        l = convert(lat, lon_offset, bias);
-        x1 = l[0]
-        y1 = l[1]
-
-        let v_d = dist(x, y, x1, y1);
-
-
-        let radius = (v_d > h_d) ? v_d : h_d;
-
-        let params = getParams(lat, lon, radius);
-        let entities = await strapi.query('trip').find({ lat_gt: params.minLat, lat_lt: params.maxLat, long_gt: params.minLon, long_lt: params.maxLon });
-
-        console.log('Buses in screen:', entities.length);
-        entities.map((bus) => { console.log(bus.lat, bus.long) })
-        return entities.map(entity => sanitizeEntity(entity, { model: strapi.models.trip }));
+        console.log('Buses in screen:', trips.length);
+        trips.map((bus) => { console.log(bus.lat, bus.long) })
+        console.log('Hubs in screen:', hubs.length);
+        hubs.map((hub) => { console.log(hub.lat, hub.long) })
+        return [trips, hubs];
     },
 
     /**

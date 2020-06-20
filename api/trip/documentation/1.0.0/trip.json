@@ -1232,6 +1232,7 @@
           },
           "conductor_status": {
             "type": "string",
+            "default": "not_started",
             "enum": [
               "not_started",
               "start_ready",
@@ -1240,6 +1241,7 @@
           },
           "driver_status": {
             "type": "string",
+            "default": "not_started",
             "enum": [
               "not_started",
               "start_ready",
@@ -1306,6 +1308,7 @@
           },
           "conductor_status": {
             "type": "string",
+            "default": "not_started",
             "enum": [
               "not_started",
               "start_ready",
@@ -1314,6 +1317,7 @@
           },
           "driver_status": {
             "type": "string",
+            "default": "not_started",
             "enum": [
               "not_started",
               "start_ready",
