@@ -49,13 +49,8 @@ function getDistance(lat, lon, h_lat, h_lon) {
     let d = dist(x, y, x1, y1);
 
     console.log('Distance', d);
-
-
-    if (isNaN(d)) {
-        console.log(lat, lon, h_lat, h_lon)
-        console.log(x, y, x1, y1);
-        throw 'Error in distance claclulation.';
-    }
+    console.log('User location:', lat, lon);
+    console.log('Hub location:', h_lat, h_lon);
 
     return d;
 }
@@ -75,13 +70,87 @@ function keyInObj(k, obj) {
     return (k in obj) && (obj[k] != null) && (obj[k] !== '')
 }
 
+function handleError(ctx, error, status = 500, message = 'Internal Server Error') {
+    ctx.response.status = status;
+    console.log('Error Object:', error);
+    console.log('Message:', message);
+    let error_pack = {
+        status: status,
+        message: message
+    }
+    return error_pack;
+}
 
 module.exports = {
 
 
     async endCurrentTrip(ctx) {
 
+        const user = ctx.state.user;
+
+        if (!(user.user_type == 'conductor' || user.user_type == 'driver')) {
+            return handleError(ctx, null, 401, 'You must be logged in as a conductor for this operation.');
+        }
+
+        let query = { status: 'in_progress' }
+        query[user.user_type] = user.id;
+
+        console.log('Query for Current trip', query)
+        let current_trip = await strapi.query('trip').findOne(query);
+        console.log('Current trip:', current_trip);
+        let hub = await strapi.query('hub').findOne({ id: current_trip.route.to });
+
+
+        if (!current_trip || !hub)
+            return handleError(ctx, null, 404, "No in_progress trip found for the user or no to hub.");
+
+
+        if (!keyInObj('lat', current_trip) || !keyInObj('long', current_trip))
+            return handleError(ctx, null, 404, "Coordinates not found in the trip object.");
+
+        if (!keyInObj('lat', hub) || !keyInObj('long', hub))
+            return handleError(ctx, null, 404, "Coordinates not found in the hub object.");
+
+        let lat = current_trip.lat;
+        let lon = current_trip.long;
+
+        let h_lat = hub.lat;
+        let h_lon = hub.long;
+
+        let d = getDistance(lat, lon, h_lat, h_lon);
+
+        if (isNaN(d))
+            return handleError(ctx, null, 500, 'Error in distance claclulation.');
+
+        if (d > 2)
+            return handleError(ctx, null, 406, 'You should be within your destination hub limits to end trip.');
+
+        let entity = await strapi.services.trip.update({ id: current_trip.id }, { status: 'completed' });
+        
+        console.log('Trip', entity.id, 'completed.');
+
+        let data = {
+            user: user.id,
+            time: new Date(),
+            hub: entity.route.to
+        }
+
+        strapi.query('attendance').create(data);
+
+        query = { status_ne: 'completed' }
+        query[user.user_type] = user.id;
+
+
+        let trips = await strapi.query('trip').find(query);
+
+        return trips;
+
+    },
+
+    async endCurrentTrip2(ctx) {
+
         if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
+
             try {
                 const { id, isAdmin = false } = await strapi.plugins[
                     'users-permissions'
