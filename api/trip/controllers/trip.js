@@ -124,7 +124,7 @@ module.exports = {
             return handleError(ctx, null, 406, 'You should be within your destination hub limits to end trip.');
 
         let entity = await strapi.services.trip.update({ id: current_trip.id }, { status: 'completed' });
-        
+
         console.log('Trip', entity.id, 'completed.');
 
         let data = {
@@ -143,101 +143,6 @@ module.exports = {
 
         return trips;
 
-    },
-
-    async endCurrentTrip2(ctx) {
-
-        if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
-
-            try {
-                const { id, isAdmin = false } = await strapi.plugins[
-                    'users-permissions'
-                ].services.jwt.getToken(ctx);
-
-                const user = ctx.state.user;
-
-                let hub, current_trip;
-
-                let query = { status: 'in_progress' }
-                query[user.user_type] = id;
-                console.log(query)
-
-                current_trip = await strapi.query('trip').findOne(query);
-                // console.log(current_trip)
-
-                hub = await strapi.query('hub').findOne({ id: current_trip.route.to });
-
-                if (!current_trip || !hub)
-                    throw "No in_progress trip for conductor or no to hub."
-
-
-                let lat = current_trip.lat;
-                let lon = current_trip.long;
-
-                if (!keyInObj(lat) || !keyInObj(lon))
-                    throw "Coordinates not found in the trip object."
-
-
-                let d = getDistance(lat, lon, h_lat, h_lon);
-
-                if (d > 2) {
-                    console.log('User location:', lat, lon);
-                    console.log('Hub location:', h_lat, h_lon);
-                    ctx.response.status = 406;
-                    ctx.response.error = 'Not Acceptable.'
-                    let error_pack = {
-                        status: 406,
-                        error: 'Not Acceptable.',
-                        message: 'You should be within your destination hub limits to end trip.'
-                    }
-                    return error_pack;
-                }
-
-
-                let entity = await strapi.services.trip.update({ id: current_trip.id }, { status: 'completed' });
-
-                console.log('Trip', entity.id, 'completed.');
-                let data = {
-                    user: id,
-                    time: new Date(),
-                    hub: entity.route.to
-                }
-
-                strapi.query('attendance').create(data);
-
-                query = { status_ne: 'completed' }
-
-                // console.log(user.user_type)
-                if (user.user_type === 'conductor') {
-                    query['conductor'] = id;
-                } else {
-                    query['driver'] = id;
-                }
-
-
-                let trips = await strapi.query('trip').find(query);
-
-                return trips;
-
-            } catch (err) {
-                // TODO: send less info for security.
-                console.error(err)
-                ctx.response.status = 500;
-                let error_pack = {
-                    status: 500,
-                    message: err
-                }
-                return error_pack;
-
-            }
-        }
-
-        ctx.response.status = 401;
-        let error_pack = {
-            status: 401,
-            message: 'You must be logged in as a conductor for this operation.'
-        }
-        return error_pack;
     },
 
     /**
