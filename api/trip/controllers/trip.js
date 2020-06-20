@@ -30,8 +30,8 @@ function dist(x, y, x1, y1) {
     return d;
 }
 
-function getNearParams(lat, lon, lat_d, lon_d){
-    
+function getNearParams(lat, lon, lat_d, lon_d) {
+
     lat = parseFloat(lat);
     lon = parseFloat(lon);
     lat_d = parseFloat(lat_d);
@@ -123,15 +123,39 @@ module.exports = {
     async update(ctx) {
         const { id } = ctx.params;
 
-        let entity;
-        if (ctx.is('multipart')) {
-            const { data, files } = parseMultipartData(ctx);
-            entity = await strapi.services.trip.update({ id }, data, {
-                files,
-            });
-        } else {
-            entity = await strapi.services.trip.update({ id }, ctx.request.body);
+        // Conductor - > Ready to Start
+        if(keyInObj('conductor_status', ctx.request.body)){
+            let entity = await strapi.services.trip.findOne({ id });
+            if (entity.driver_status == 'start_ready' &&  ctx.request.body.conductor_status == 'start_ready' && entity.status == 'not_started') {
+                ctx.request.body.status = 'in_progress';
+            }
         }
+        // Driver - > Ready to Start
+        if(keyInObj('driver_status', ctx.request.body)){
+            let entity = await strapi.services.trip.findOne({ id });
+            if (entity.conductor_status == 'start_ready' &&  ctx.request.body.driver_status == 'start_ready' && entity.status == 'not_started') {
+                ctx.request.body.status = 'in_progress';
+            }
+        }
+        
+        // Conductor - > Ready to End
+        if(keyInObj('conductor_status', ctx.request.body)){
+            let entity = await strapi.services.trip.findOne({ id });
+            if (entity.driver_status == 'end_ready' &&  ctx.request.body.conductor_status == 'end_ready' && entity.status == 'in_progress') {
+                ctx.request.body.status = 'completed';
+            }
+        }
+        // Driver - > Ready to End
+        if(keyInObj('driver_status', ctx.request.body)){
+            let entity = await strapi.services.trip.findOne({ id });
+            if (entity.conductor_status == 'end_ready' &&  ctx.request.body.driver_status == 'end_ready' && entity.status == 'in_progress') {
+                ctx.request.body.status = 'completed';
+            }
+        }
+        
+        console.log(ctx.request.body);
+        let entity = await strapi.services.trip.update({ id }, ctx.request.body);
+
 
         return sanitizeEntity(entity, { model: strapi.models.trip });
     },
@@ -331,7 +355,7 @@ module.exports = {
 
     async near(ctx) {
         let { lat, lon, lat_d, lon_d } = ctx.query;
-        if (!lat || !lon || !lat_d || !lon_d) 
+        if (!lat || !lon || !lat_d || !lon_d)
             return handleError(ctx, null, 400, 'Coordinates not supplied with the request. You should supply lat, lon, lat_d and lon_d.');
 
         let params = getNearParams(lat, lon, lat_d, lon_d);
@@ -342,7 +366,8 @@ module.exports = {
         trips.map((bus) => { console.log(bus.lat, bus.long) })
         console.log('Hubs in screen:', hubs.length);
         hubs.map((hub) => { console.log(hub.lat, hub.long) })
-        return [trips, hubs];
+
+        return {trips, hubs};
     },
 
     /**
