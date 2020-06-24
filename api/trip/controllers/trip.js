@@ -123,37 +123,24 @@ module.exports = {
     async update(ctx) {
         const { id } = ctx.params;
 
-        // Conductor - > Ready to Start
-        if(keyInObj('conductor_status', ctx.request.body)){
+        if (keyInObj('conductor_status', ctx.request.body) || keyInObj('driver_status', ctx.request.body)) {
             let entity = await strapi.services.trip.findOne({ id });
-            if (entity.driver_status == 'start_ready' &&  ctx.request.body.conductor_status == 'start_ready' && entity.status == 'not_started') {
+
+            const first_person = keyInObj('conductor_status', ctx.request.body) ? 'conductor_status' : 'driver_status';
+            const second_person = keyInObj('driver_status', ctx.request.body) ? 'conductor_status' : 'driver_status';
+
+            // Trip not started.
+            if (entity.status == 'not_started' && ctx.request.body[first_person] == 'start_ready' && entity[second_person] == 'start_ready')
                 ctx.request.body.status = 'in_progress';
-            }
-        }
-        // Driver - > Ready to Start
-        if(keyInObj('driver_status', ctx.request.body)){
-            let entity = await strapi.services.trip.findOne({ id });
-            if (entity.conductor_status == 'start_ready' &&  ctx.request.body.driver_status == 'start_ready' && entity.status == 'not_started') {
-                ctx.request.body.status = 'in_progress';
-            }
-        }
-        
-        // Conductor - > Ready to End
-        if(keyInObj('conductor_status', ctx.request.body)){
-            let entity = await strapi.services.trip.findOne({ id });
-            if (entity.driver_status == 'end_ready' &&  ctx.request.body.conductor_status == 'end_ready' && entity.status == 'in_progress') {
+
+            // Trip not started.
+            if (entity.status == 'in_progress' && ctx.request.body[first_person] == 'end_ready' && entity[second_person] == 'end_ready')
                 ctx.request.body.status = 'completed';
-            }
+
+            console.log(ctx.request.body);
+
         }
-        // Driver - > Ready to End
-        if(keyInObj('driver_status', ctx.request.body)){
-            let entity = await strapi.services.trip.findOne({ id });
-            if (entity.conductor_status == 'end_ready' &&  ctx.request.body.driver_status == 'end_ready' && entity.status == 'in_progress') {
-                ctx.request.body.status = 'completed';
-            }
-        }
-        
-        console.log(ctx.request.body);
+
         let entity = await strapi.services.trip.update({ id }, ctx.request.body);
 
 
@@ -359,7 +346,7 @@ module.exports = {
             return handleError(ctx, null, 400, 'Coordinates not supplied with the request. You should supply lat, lon, lat_d and lon_d.');
 
         let params = getNearParams(lat, lon, lat_d, lon_d);
-        let trips = await strapi.query('trip').find({ lat_gt: params.minLat, lat_lt: params.maxLat, long_gt: params.minLon, long_lt: params.maxLon });
+        let trips = await strapi.query('trip').find({ status: 'in_progress', lat_gt: params.minLat, lat_lt: params.maxLat, long_gt: params.minLon, long_lt: params.maxLon });
         let hubs = await strapi.query('hub').find({ lat_gt: params.minLat, lat_lt: params.maxLat, long_gt: params.minLon, long_lt: params.maxLon });
 
         console.log('Buses in screen:', trips.length);
@@ -367,7 +354,7 @@ module.exports = {
         console.log('Hubs in screen:', hubs.length);
         hubs.map((hub) => { console.log(hub.lat, hub.long) })
 
-        return {trips, hubs};
+        return { trips, hubs };
     },
 
     /**
