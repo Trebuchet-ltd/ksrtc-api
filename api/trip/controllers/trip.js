@@ -146,7 +146,7 @@ module.exports = {
                 let entity = await strapi.services.trip.findOne({ id });
     
                 if (entity.loc_last_update > ctx.request.body.loc_last_update)
-                    return handleError(ctx, null, 408, 'Late Request.');
+                    return handleError(ctx, null, 409, 'Late Request Conflict.');
             } else {
                 return handleError(ctx, null, 400, 'Request does not contain timestamp. (loc_last_update)');
             }
