@@ -20,8 +20,8 @@
       "collection": "trip"
     },
     "hub": {
-      "model": "hub",
-      "via": "buses"
+      "via": "buses",
+      "model": "hub"
     },
     "capacity": {
       "type": "integer",
