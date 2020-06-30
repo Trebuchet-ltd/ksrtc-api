@@ -141,6 +141,19 @@ module.exports = {
 
         }
 
+        if (keyInObj('lat', ctx.request.body) || keyInObj('long', ctx.request.body)) {
+            if (keyInObj('loc_last_update', ctx.request.body)) {
+                let entity = await strapi.services.trip.findOne({ id });
+    
+                if (entity.loc_last_update > ctx.request.body.loc_last_update)
+                    return handleError(ctx, null, 408, 'Late Request.');
+            } else {
+                return handleError(ctx, null, 400, 'Request does not contain timestamp. (loc_last_update)');
+            }
+        }
+
+
+
         let entity = await strapi.services.trip.update({ id }, ctx.request.body);
 
 
