@@ -653,6 +653,9 @@
               },
               "code": {
                 "type": "string"
+              },
+              "district": {
+                "type": "string"
               }
             }
           }

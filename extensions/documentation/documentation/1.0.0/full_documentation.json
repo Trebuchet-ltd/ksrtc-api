@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/26/2020 1:07:02 PM"
+    "x-generation-date": "06/30/2020 11:28:47 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6500,6 +6500,9 @@
               },
               "code": {
                 "type": "string"
+              },
+              "district": {
+                "type": "string"
               }
             }
           }
@@ -6714,6 +6717,9 @@
                 }
               },
               "code": {
+                "type": "string"
+              },
+              "district": {
                 "type": "string"
               }
             }
@@ -6959,6 +6965,25 @@
           },
           "code": {
             "type": "string"
+          },
+          "district": {
+            "type": "string",
+            "enum": [
+              "Thiruvananthapuram",
+              "Kollam",
+              "Alappuzha",
+              "Pathanamthitta",
+              "Kottayam",
+              "Idukki",
+              "Ernakulam",
+              "Thrissur",
+              "Palakkad",
+              "Malappuram",
+              "Kozhikode",
+              "Wayanadu",
+              "Kannur",
+              "Kasaragod"
+            ]
           }
         }
       },
@@ -7006,6 +7031,25 @@
           },
           "code": {
             "type": "string"
+          },
+          "district": {
+            "type": "string",
+            "enum": [
+              "Thiruvananthapuram",
+              "Kollam",
+              "Alappuzha",
+              "Pathanamthitta",
+              "Kottayam",
+              "Idukki",
+              "Ernakulam",
+              "Thrissur",
+              "Palakkad",
+              "Malappuram",
+              "Kozhikode",
+              "Wayanadu",
+              "Kannur",
+              "Kasaragod"
+            ]
           }
         }
       },
@@ -7148,6 +7192,9 @@
               },
               "code": {
                 "type": "string"
+              },
+              "district": {
+                "type": "string"
               }
             }
           }
@@ -7235,6 +7282,9 @@
               },
               "code": {
                 "type": "string"
+              },
+              "district": {
+                "type": "string"
               }
             }
           },
@@ -7287,6 +7337,9 @@
               },
               "code": {
                 "type": "string"
+              },
+              "district": {
+                "type": "string"
               }
             }
           },
@@ -7338,6 +7391,9 @@
                 }
               },
               "code": {
+                "type": "string"
+              },
+              "district": {
                 "type": "string"
               }
             }
@@ -7445,6 +7501,9 @@
                 }
               },
               "code": {
+                "type": "string"
+              },
+              "district": {
                 "type": "string"
               }
             }
@@ -7650,6 +7709,9 @@
               },
               "code": {
                 "type": "string"
+              },
+              "district": {
+                "type": "string"
               }
             }
           },
@@ -7707,6 +7769,9 @@
                 }
               },
               "code": {
+                "type": "string"
+              },
+              "district": {
                 "type": "string"
               }
             }
@@ -8209,6 +8274,9 @@
                 }
               },
               "code": {
+                "type": "string"
+              },
+              "district": {
                 "type": "string"
               }
             }

@@ -45,6 +45,25 @@
     "code": {
       "type": "string",
       "unique": true
+    },
+    "district": {
+      "type": "enumeration",
+      "enum": [
+        "Thiruvananthapuram",
+        "Kollam",
+        "Alappuzha",
+        "Pathanamthitta",
+        "Kottayam",
+        "Idukki",
+        "Ernakulam",
+        "Thrissur",
+        "Palakkad",
+        "Malappuram",
+        "Kozhikode",
+        "Wayanadu",
+        "Kannur",
+        "Kasaragod"
+      ]
     }
   }
 }

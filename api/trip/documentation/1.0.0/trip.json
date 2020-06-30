@@ -1097,6 +1097,9 @@
               },
               "code": {
                 "type": "string"
+              },
+              "district": {
+                "type": "string"
               }
             }
           },
@@ -1154,6 +1157,9 @@
                 }
               },
               "code": {
+                "type": "string"
+              },
+              "district": {
                 "type": "string"
               }
             }

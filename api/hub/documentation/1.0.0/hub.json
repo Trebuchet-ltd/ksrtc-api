@@ -726,6 +726,25 @@
           },
           "code": {
             "type": "string"
+          },
+          "district": {
+            "type": "string",
+            "enum": [
+              "Thiruvananthapuram",
+              "Kollam",
+              "Alappuzha",
+              "Pathanamthitta",
+              "Kottayam",
+              "Idukki",
+              "Ernakulam",
+              "Thrissur",
+              "Palakkad",
+              "Malappuram",
+              "Kozhikode",
+              "Wayanadu",
+              "Kannur",
+              "Kasaragod"
+            ]
           }
         }
       },
@@ -773,6 +792,25 @@
           },
           "code": {
             "type": "string"
+          },
+          "district": {
+            "type": "string",
+            "enum": [
+              "Thiruvananthapuram",
+              "Kollam",
+              "Alappuzha",
+              "Pathanamthitta",
+              "Kottayam",
+              "Idukki",
+              "Ernakulam",
+              "Thrissur",
+              "Palakkad",
+              "Malappuram",
+              "Kozhikode",
+              "Wayanadu",
+              "Kannur",
+              "Kasaragod"
+            ]
           }
         }
       }
