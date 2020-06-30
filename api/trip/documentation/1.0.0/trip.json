@@ -1256,6 +1256,10 @@
           },
           "start_hub": {
             "type": "string"
+          },
+          "loc_last_update": {
+            "type": "integer",
+            "default": "0"
           }
         }
       },
@@ -1335,6 +1339,10 @@
           },
           "start_hub": {
             "type": "string"
+          },
+          "loc_last_update": {
+            "type": "integer",
+            "default": "0"
           }
         }
       }

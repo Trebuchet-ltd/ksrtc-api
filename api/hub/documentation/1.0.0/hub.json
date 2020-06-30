@@ -600,6 +600,9 @@
                 },
                 "start_hub": {
                   "type": "string"
+                },
+                "loc_last_update": {
+                  "type": "integer"
                 }
               }
             }

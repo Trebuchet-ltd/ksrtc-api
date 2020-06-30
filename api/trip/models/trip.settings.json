@@ -47,8 +47,8 @@
       "type": "string"
     },
     "hub": {
-      "via": "trips",
-      "model": "hub"
+      "model": "hub",
+      "via": "trips"
     },
     "number_of_passengers": {
       "type": "integer"
@@ -90,6 +90,10 @@
     },
     "start_hub": {
       "type": "string"
+    },
+    "loc_last_update": {
+      "type": "biginteger",
+      "default": "0"
     }
   }
 }

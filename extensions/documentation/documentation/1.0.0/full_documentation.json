@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/30/2020 11:28:47 AM"
+    "x-generation-date": "06/30/2020 11:33:07 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6596,6 +6596,9 @@
               },
               "start_hub": {
                 "type": "string"
+              },
+              "loc_last_update": {
+                "type": "integer"
               }
             }
           },
@@ -6665,6 +6668,9 @@
                 },
                 "start_hub": {
                   "type": "string"
+                },
+                "loc_last_update": {
+                  "type": "integer"
                 }
               }
             }
@@ -6839,6 +6845,9 @@
                 },
                 "start_hub": {
                   "type": "string"
+                },
+                "loc_last_update": {
+                  "type": "integer"
                 }
               }
             }
@@ -7128,6 +7137,9 @@
               },
               "start_hub": {
                 "type": "string"
+              },
+              "loc_last_update": {
+                "type": "integer"
               }
             }
           },
@@ -7868,6 +7880,10 @@
           },
           "start_hub": {
             "type": "string"
+          },
+          "loc_last_update": {
+            "type": "integer",
+            "default": "0"
           }
         }
       },
@@ -7947,6 +7963,10 @@
           },
           "start_hub": {
             "type": "string"
+          },
+          "loc_last_update": {
+            "type": "integer",
+            "default": "0"
           }
         }
       },
@@ -8222,6 +8242,9 @@
                 },
                 "start_hub": {
                   "type": "string"
+                },
+                "loc_last_update": {
+                  "type": "integer"
                 }
               }
             }
@@ -8354,6 +8377,9 @@
               },
               "start_hub": {
                 "type": "string"
+              },
+              "loc_last_update": {
+                "type": "integer"
               }
             }
           },
@@ -8423,6 +8449,9 @@
                 },
                 "start_hub": {
                   "type": "string"
+                },
+                "loc_last_update": {
+                  "type": "integer"
                 }
               }
             }
