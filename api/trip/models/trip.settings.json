@@ -87,6 +87,9 @@
         "end_ready"
       ],
       "default": "not_started"
+    },
+    "start_hub": {
+      "type": "string"
     }
   }
 }

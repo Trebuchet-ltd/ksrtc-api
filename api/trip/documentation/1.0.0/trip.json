@@ -1247,6 +1247,9 @@
               "start_ready",
               "end_ready"
             ]
+          },
+          "start_hub": {
+            "type": "string"
           }
         }
       },
@@ -1323,6 +1326,9 @@
               "start_ready",
               "end_ready"
             ]
+          },
+          "start_hub": {
+            "type": "string"
           }
         }
       }

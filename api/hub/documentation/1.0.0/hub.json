@@ -597,6 +597,9 @@
                 },
                 "driver_status": {
                   "type": "string"
+                },
+                "start_hub": {
+                  "type": "string"
                 }
               }
             }

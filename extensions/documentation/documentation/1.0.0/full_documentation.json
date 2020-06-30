@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/20/2020 7:40:03 PM"
+    "x-generation-date": "06/26/2020 1:07:02 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6590,6 +6590,9 @@
               },
               "driver_status": {
                 "type": "string"
+              },
+              "start_hub": {
+                "type": "string"
               }
             }
           },
@@ -6655,6 +6658,9 @@
                   "type": "string"
                 },
                 "driver_status": {
+                  "type": "string"
+                },
+                "start_hub": {
                   "type": "string"
                 }
               }
@@ -6823,6 +6829,9 @@
                   "type": "string"
                 },
                 "driver_status": {
+                  "type": "string"
+                },
+                "start_hub": {
                   "type": "string"
                 }
               }
@@ -7071,6 +7080,9 @@
                 "type": "string"
               },
               "driver_status": {
+                "type": "string"
+              },
+              "start_hub": {
                 "type": "string"
               }
             }
@@ -7788,6 +7800,9 @@
               "start_ready",
               "end_ready"
             ]
+          },
+          "start_hub": {
+            "type": "string"
           }
         }
       },
@@ -7864,6 +7879,9 @@
               "start_ready",
               "end_ready"
             ]
+          },
+          "start_hub": {
+            "type": "string"
           }
         }
       },
@@ -8136,6 +8154,9 @@
                 },
                 "driver_status": {
                   "type": "string"
+                },
+                "start_hub": {
+                  "type": "string"
                 }
               }
             }
@@ -8262,6 +8283,9 @@
               },
               "driver_status": {
                 "type": "string"
+              },
+              "start_hub": {
+                "type": "string"
               }
             }
           },
@@ -8327,6 +8351,9 @@
                   "type": "string"
                 },
                 "driver_status": {
+                  "type": "string"
+                },
+                "start_hub": {
                   "type": "string"
                 }
               }

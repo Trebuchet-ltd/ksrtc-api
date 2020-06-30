@@ -1,2 +1,25 @@
 yarn run v1.22.4
 $ strapi develop
+
+ Project information
+
+[90m┌────────────────────[39m[90m┬──────────────────────────────────────────────────┐[39m
+[90m│[39m Time               [90m│[39m Thu Jun 25 2020 11:36:10 GMT+0000 (Coordinated … [90m│[39m
+[90m│[39m Launched in        [90m│[39m 1933 ms                                          [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 2696                                             [90m│[39m
+[90m│[39m Version            [90m│[39m 3.0.0-beta.20.3 (node v12.18.0)                  [90m│[39m
+[90m└────────────────────[39m[90m┴──────────────────────────────────────────────────┘[39m
+
+ Actions available
+
+Welcome back!
+To manage your project 🚀, go to the administration panel at:
+http://localhost:1337/ksrtcTrebuchet/admin
+
+To access the server ⚡️, go to:
+http://localhost:1337
+
+[2020-06-25T11:36:10.531Z] info File changed: /home/ubuntu/ksrtc-api/log.txt
+[2020-06-25T11:36:10.534Z] info The server is restarting
+
