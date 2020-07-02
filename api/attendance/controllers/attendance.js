@@ -51,93 +51,102 @@ function getDistance(lat, lon, h_lat, h_lon) {
     let d = dist(x, y, x1, y1);
 
     console.log('Distance', d);
-
-
-    if (isNaN(d)) {
-        console.log(lat, lon, h_lat, h_lon)
-        console.log(x, y, x1, y1);
-        throw 'Error in distance claclulation.';
-    }
+    console.log('User location:', lat, lon);
+    console.log('Hub location:', h_lat, h_lon);
 
     return d;
+}
+
+
+function keyInObj(k, obj) {
+    return (k in obj) && (obj[k] != null) && (obj[k] !== '')
+}
+
+function handleError(ctx, error, status = 500, message = 'Internal Server Error') {
+    ctx.response.status = status;
+    console.log('Error Object:', error);
+    console.log('Message:', message);
+    let error_pack = {
+        status: status,
+        message: message
+    }
+    return error_pack;
 }
 
 module.exports = {
 
     async checkin(ctx) {
 
-        if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
-            try {
-                const { id, isAdmin = false } = await strapi.plugins[
-                    'users-permissions'
-                ].services.jwt.getToken(ctx);
+        const user = ctx.state.user;
 
-                // The Authenticated user from the JWT.
-                const user = ctx.state.user;
-
-
-                // The POST data.
-                let body = ctx.request.body;
-                // Handling for alternate content-types of the POST data.
-                if (typeof (ctx.request.body) === 'string') {
-                    body = JSON.parse(ctx.request.body)
-                }
-
-                // Location validation for Checking In. User should be within the hub limits.
-                let lat = body['lat'];
-                let lon = body['lon'];
-
-                let hub = await strapi.query('hub').findOne({ id: user.hub });
-
-                let h_lat = hub.lat;
-                let h_lon = hub.long;
-
-                let d = getDistance(lat, lon, h_lat, h_lon);
-
-                if (d > 2) {
-                    console.log('User location:', lat, lon);
-                    console.log('Hub location:', h_lat, h_lon);
-                    ctx.response.status = 406;
-                    ctx.response.error = 'Not Acceptable.'
-                    let error_pack = {
-                        status: 406,
-                        error: 'Not Acceptable.',
-                        message: 'You should be within your hub limits to check in.'
-                    }
-                    return error_pack;
-                }
-
-
-                // Adding the record to the attendace register.
-                strapi.query('attendance').create({
-                    user: id,
-                    time: new Date(),
-                    hub: user.hub,
-                });
-
-
-                // Creating the query to find the trips associated with the conductor / driver.
-                let query = { status_ne: 'completed' }
-                query[user.user_type] = id;
-
-
-                // Returning a list of the remaining trips of the day.
-                let trips = await strapi.query('trip').find(query);
-
-                // return sanitizeEntity(trips, { model: strapi.models.trip });
-                return trips;
-
-            } catch (err) {
-                // TODO: Decrease the amount of DATA given for security reasons.
-                console.log(err)
-                ctx.response.status = 500;
-                let error_pack = {
-                    status: 500,
-                    message: err
-                }
-                return error_pack;
-
-            }
+        if (!(user.user_type == 'conductor' || user.user_type == 'driver')) {
+            return handleError(ctx, null, 401, 'You must be logged in as a conductor for this operation.');
         }
+
+
+        let query = { status: 'not_started' }
+        query[user.user_type] = user.id;
+
+        let current_trip = await strapi.query('trip').findOne(query);
+
+        if (!current_trip)
+            return handleError(ctx, null, 404, "No new trip found assigned to the user.");
+
+        let hub = await strapi.query('hub').findOne({ id: current_trip.route.from });
+
+        if (!hub)
+            return handleError(ctx, null, 404, "No starting hub found.");
+
+        if (!keyInObj('lat', hub) || !keyInObj('long', hub))
+            return handleError(ctx, null, 404, "Coordinates not found in the hub object.");
+
+        // The POST data.
+        let body = ctx.request.body;
+        // Handling for alternate content-types of the POST data.
+        if (typeof (ctx.request.body) === 'string') {
+            body = JSON.parse(ctx.request.body)
+        }
+
+        if (!keyInObj('lat', body) || !keyInObj('lon', body))
+            return handleError(ctx, null, 404, "Coordinates not found in the request.");
+
+
+
+        console.log("Checking into ", hub.name);
+
+        // Location validation for Checking In. User should be within the limits of the From Hub of his first trip.
+        let lat = body['lat'];
+        let lon = body['lon'];
+
+        let h_lat = hub.lat;
+        let h_lon = hub.long;
+
+
+        let d = getDistance(lat, lon, h_lat, h_lon);
+
+        if (isNaN(d))
+            return handleError(ctx, null, 500, 'Error in distance claclulation.');
+
+        if (d > 2)
+            return handleError(ctx, null, 406, 'You should be within ' + hub.name + ' hub limits to check in.');
+
+
+        // Adding the record to the attendace register.
+        strapi.query('attendance').create({
+            user: user.id,
+            time: new Date(),
+            hub: user.hub,
+        });
+
+
+        // Creating the query to find the trips associated with the conductor / driver.
+        query = { status_ne: 'completed' }
+        query[user.user_type] = user.id;
+
+
+        // Returning a list of the remaining trips of the day.
+        let trips = await strapi.query('trip').find(query);
+
+        return trips;
     }
 };
