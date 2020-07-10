@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('lodash');
+
 /**
  * Read the documentation (https://strapi.io/documentation/3.0.0-beta.x/concepts/controllers.html#core-controllers)
  * to customize this controller
@@ -22,12 +24,30 @@ function handleError(ctx, error, status = 500, message = 'Internal Server Error'
 
 module.exports = {
     /**
+     * Return hubs district-wise.
+     *
+     * @return {Object}
+     */
+
+    async districts(ctx) {
+
+        let hubs = await strapi.query('hub').find(ctx.query);
+
+        var grouped = _.groupBy(hubs, 'district');
+
+        return grouped;
+    },
+
+
+    /**
      * Create a record.
      *
      * @return {Object}
      */
 
     async create(ctx) {
+
+        // TODO: handle case where req body is empty
 
         let duplicate = await strapi.query('hub').findOne(ctx.request.body);
 

@@ -2,6 +2,14 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/hubs/districts",
+      "handler": "hub.districts",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/hubs",
       "handler": "hub.find",
       "config": {
