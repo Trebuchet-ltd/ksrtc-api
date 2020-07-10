@@ -89,10 +89,14 @@ module.exports = {
 
         let current_trip = await strapi.query('trip').findOne(query);
 
-        if (!current_trip)
-            return handleError(ctx, null, 404, "No new trip found assigned to the user.");
+        let hub;
+        if (!current_trip){
+            console.log("No new trip assigned to user ", user.id);
+            hub = await strapi.query('hub').findOne({ id: user.hub });
+        } else{
+            hub = await strapi.query('hub').findOne({ id: current_trip.route.from });
+        }
 
-        let hub = await strapi.query('hub').findOne({ id: current_trip.route.from });
 
         if (!hub)
             return handleError(ctx, null, 404, "No starting hub found.");
