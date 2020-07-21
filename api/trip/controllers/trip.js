@@ -123,29 +123,37 @@ module.exports = {
     async update(ctx) {
         const { id } = ctx.params;
 
-        if (keyInObj('conductor_status', ctx.request.body) || keyInObj('driver_status', ctx.request.body)) {
+        // The POST data.
+        let body = ctx.request.body;
+        // Handling for alternate content-types of the POST data.
+        if (typeof (ctx.request.body) === 'string') {
+            body = JSON.parse(ctx.request.body)
+        }
+
+
+        if (keyInObj('conductor_status', body) || keyInObj('driver_status', body)) {
             let entity = await strapi.services.trip.findOne({ id });
 
-            const first_person = keyInObj('conductor_status', ctx.request.body) ? 'conductor_status' : 'driver_status';
-            const second_person = keyInObj('driver_status', ctx.request.body) ? 'conductor_status' : 'driver_status';
+            const first_person = keyInObj('conductor_status', body) ? 'conductor_status' : 'driver_status';
+            const second_person = keyInObj('driver_status', body) ? 'conductor_status' : 'driver_status';
 
             // Trip not started.
-            if (entity.status == 'not_started' && ctx.request.body[first_person] == 'start_ready' && entity[second_person] == 'start_ready')
-                ctx.request.body.status = 'in_progress';
+            if (entity.status == 'not_started' && body[first_person] == 'start_ready' && entity[second_person] == 'start_ready')
+                body.status = 'in_progress';
 
             // Trip not started.
-            if (entity.status == 'in_progress' && ctx.request.body[first_person] == 'end_ready' && entity[second_person] == 'end_ready')
-                ctx.request.body.status = 'completed';
+            if (entity.status == 'in_progress' && body[first_person] == 'end_ready' && entity[second_person] == 'end_ready')
+                body.status = 'completed';
 
-            console.log(ctx.request.body);
+            console.log(body);
 
         }
 
-        if (keyInObj('lat', ctx.request.body) || keyInObj('long', ctx.request.body)) {
-            if (keyInObj('loc_last_update', ctx.request.body)) {
+        if (keyInObj('lat', body) || keyInObj('long', body)) {
+            if (keyInObj('loc_last_update', body)) {
                 let entity = await strapi.services.trip.findOne({ id });
-    
-                if (entity.loc_last_update > ctx.request.body.loc_last_update)
+
+                if (entity.loc_last_update > body.loc_last_update)
                     return handleError(ctx, null, 409, 'Late Request Conflict.');
             } else {
                 return handleError(ctx, null, 400, 'Request does not contain timestamp. (loc_last_update)');
@@ -154,7 +162,7 @@ module.exports = {
 
 
 
-        let entity = await strapi.services.trip.update({ id }, ctx.request.body);
+        let entity = await strapi.services.trip.update({ id }, body);
 
 
         return sanitizeEntity(entity, { model: strapi.models.trip });
