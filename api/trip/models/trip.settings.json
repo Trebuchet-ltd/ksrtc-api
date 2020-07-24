@@ -10,7 +10,8 @@
   },
   "attributes": {
     "start_time": {
-      "type": "datetime"
+      "type": "datetime",
+      "required": true
     },
     "end_time": {
       "type": "datetime"
@@ -20,7 +21,8 @@
       "via": "trips"
     },
     "type": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "conductor": {
       "columnName": "Conductor",

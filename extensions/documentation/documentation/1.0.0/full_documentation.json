@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "07/24/2020 9:57:58 PM"
+    "x-generation-date": "07/24/2020 4:43:28 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6660,7 +6660,9 @@
           },
           "trip": {
             "required": [
-              "id"
+              "id",
+              "start_time",
+              "type"
             ],
             "properties": {
               "id": {
@@ -6732,7 +6734,9 @@
             "type": "array",
             "items": {
               "required": [
-                "id"
+                "id",
+                "start_time",
+                "type"
               ],
               "properties": {
                 "id": {
@@ -6909,7 +6913,9 @@
             "type": "array",
             "items": {
               "required": [
-                "id"
+                "id",
+                "start_time",
+                "type"
               ],
               "properties": {
                 "id": {
@@ -7201,7 +7207,9 @@
           },
           "trip": {
             "required": [
-              "id"
+              "id",
+              "start_time",
+              "type"
             ],
             "properties": {
               "id": {
@@ -7673,7 +7681,9 @@
       },
       "Trip": {
         "required": [
-          "id"
+          "id",
+          "start_time",
+          "type"
         ],
         "properties": {
           "id": {
@@ -8014,6 +8024,10 @@
         }
       },
       "NewTrip": {
+        "required": [
+          "start_time",
+          "type"
+        ],
         "properties": {
           "start_time": {
             "type": "datetime"
@@ -8306,7 +8320,9 @@
             "type": "array",
             "items": {
               "required": [
-                "id"
+                "id",
+                "start_time",
+                "type"
               ],
               "properties": {
                 "id": {
@@ -8441,7 +8457,9 @@
           },
           "current_trip": {
             "required": [
-              "id"
+              "id",
+              "start_time",
+              "type"
             ],
             "properties": {
               "id": {
@@ -8513,7 +8531,9 @@
             "type": "array",
             "items": {
               "required": [
-                "id"
+                "id",
+                "start_time",
+                "type"
               ],
               "properties": {
                 "id": {

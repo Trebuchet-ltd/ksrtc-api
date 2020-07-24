@@ -595,7 +595,9 @@
             "type": "array",
             "items": {
               "required": [
-                "id"
+                "id",
+                "start_time",
+                "type"
               ],
               "properties": {
                 "id": {

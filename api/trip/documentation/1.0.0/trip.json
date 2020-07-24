@@ -992,7 +992,9 @@
     "schemas": {
       "Trip": {
         "required": [
-          "id"
+          "id",
+          "start_time",
+          "type"
         ],
         "properties": {
           "id": {
@@ -1333,6 +1335,10 @@
         }
       },
       "NewTrip": {
+        "required": [
+          "start_time",
+          "type"
+        ],
         "properties": {
           "start_time": {
             "type": "datetime"

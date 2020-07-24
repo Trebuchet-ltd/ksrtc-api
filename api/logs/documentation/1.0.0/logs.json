@@ -527,7 +527,9 @@
           },
           "trip": {
             "required": [
-              "id"
+              "id",
+              "start_time",
+              "type"
             ],
             "properties": {
               "id": {
