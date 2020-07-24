@@ -120,6 +120,44 @@ function handleError(ctx, error, status = 500, message = 'Internal Server Error'
 
 module.exports = {
 
+    /**
+ * Create a record.
+ *
+ * @return {Object}
+ */
+
+    async createDeep(ctx) {
+        let newTrip = await strapi.services.trip.create(ctx.request.body);
+        const entity = await strapi.services.trip.findOne({ id: newTrip.id }, [
+            {
+                path: 'route',
+                populate: [{
+                    path: 'stops'
+                },
+                {
+                    path: 'from'
+                },
+                {
+                    path: 'to'
+                }
+                ]
+            },
+            {
+                path: 'conductor'
+            },
+            {
+                path: 'bus'
+            },
+            {
+                path: 'next_stop'
+            },
+            {
+                path: 'hub'
+            },
+        ]);
+        return sanitizeEntity(entity, { model: strapi.models.trip });
+    },
+
     async update(ctx) {
         const { id } = ctx.params;
 

@@ -41,6 +41,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/trips/getDeep",
+      "handler": "trip.createDeep",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/trips/:id/getDeep",
       "handler": "trip.getOneDeep",
