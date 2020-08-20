@@ -1,5 +1,5 @@
 'use strict';
-const { sanitizeEntity } = require('strapi-utils');
+const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
 
 /**
  * Read the documentation (https://strapi.io/documentation/3.0.0-beta.x/concepts/controllers.html#core-controllers)
@@ -47,19 +47,26 @@ module.exports = {
 
         const required = ['route', 'startTime', 'type', 'hub']
 
-        const missingField = validateRequiredFields(required, ctx.request.body);
+        let data, entity;
+        if (ctx.is('multipart')) {
+            const obj = parseMultipartData(ctx);
+            data = obj['data']
+        } else {
+            data = ctx.request.body;
+        }
+
+        const missingField = validateRequiredFields(required, data);
         if (missingField != null) {
             return handleError(ctx, null, 400, "Missing value for one or more required field(s). Missing field: " + missingField)
         }
-        let entity
         try {
-            entity = await strapi.services.template.create(ctx.request.body);
+            entity = await strapi.services.template.create(data);
         } catch (error) {
             if (error.name === 'ValidationError') {
                 console.log("Validaation error")
                 return handleError(ctx, null, 400, "Validation Error.")
             }
-            throw(error)
+            throw (error)
         }
 
         return sanitizeEntity(entity, { model: strapi.models.template });
