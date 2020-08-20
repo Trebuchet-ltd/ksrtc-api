@@ -118,10 +118,52 @@ function handleError(ctx, error, status = 500, message = 'Internal Server Error'
     return error_pack;
 }
 
+function validateRequiredFields(fields, obj) {
+    let res = null;
+    fields.forEach(field => {
+        if (!keyInObj(field, obj)) {
+            console.log(field)
+            res = field
+        }
+    });
+    return res;
+}
+
 module.exports = {
 
+
     /**
- * Create a record.
+     * Create a record.
+     *
+     * @return {Object}
+     */
+
+    async create(ctx) {
+
+        // TODO: Bus.
+        const required = ['start_time', 'end_time', 'type', 'conductor', 'driver', 'route', 'from', 'to', 'hub', 'driver']
+
+        const missingField = validateRequiredFields(required, ctx.request.body);
+        if (missingField != null) {
+            return handleError(ctx, null, 400, "Missing value for one or more required field(s). Missing field: " + missingField)
+        }
+        let entity
+        try {
+            entity = await strapi.services.trip.create(ctx.request.body);
+        } catch (error) {
+            if (error.name === 'ValidationError') {
+                console.log("Validaation error")
+                return handleError(ctx, null, 400, "Validation Error.")
+            }
+            throw (error)
+        }
+
+        return sanitizeEntity(entity, { model: strapi.models.trip });
+    },
+
+
+    /**
+ * Create a record and return a populated object.
  *
  * @return {Object}
  */

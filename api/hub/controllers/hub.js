@@ -10,6 +10,10 @@ var _ = require('lodash');
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
 
 
+function keyInObj(k, obj) {
+    return (k in obj) && (obj[k] != null) && (obj[k] !== '')
+}
+
 function handleError(ctx, error, status = 500, message = 'Internal Server Error') {
     ctx.response.status = status;
     console.log('Error Object:', error);
@@ -20,6 +24,18 @@ function handleError(ctx, error, status = 500, message = 'Internal Server Error'
     }
     return error_pack;
 }
+
+function validateRequiredFields(fields, obj) {
+    let res = null;
+    fields.forEach(field => {
+        if (!keyInObj(field, obj)) {
+            console.log(field)
+            res = field
+        }
+    });
+    return res;
+}
+
 
 
 module.exports = {
@@ -47,6 +63,13 @@ module.exports = {
 
     async create(ctx) {
 
+        const required = ['name', 'isHub']
+
+        const missingField = validateRequiredFields(required, ctx.request.body);
+        if (missingField != null) {
+            return handleError(ctx, null, 400, "Missing value for one or more required field(s). Missing field: " + missingField)
+        }
+
         // TODO: handle case where req body is empty
 
         let duplicate = await strapi.query('hub').findOne(ctx.request.body);
@@ -54,7 +77,17 @@ module.exports = {
         if (duplicate)
             return handleError(ctx, null, 409, 'Hub already Exists.');
 
-        let entity = await strapi.services.hub.create(ctx.request.body);
+
+        let entity
+        try {
+            entity = await strapi.services.hub.create(ctx.request.body);
+        } catch (error) {
+            if (error.name === 'ValidationError') {
+                console.log("Validaation error")
+                return handleError(ctx, null, 400, "Validation Error.")
+            }
+            throw (error)
+        }
 
         return sanitizeEntity(entity, { model: strapi.models.hub });
     },
