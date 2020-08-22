@@ -6,89 +6,32 @@ const { sanitizeEntity } = require('strapi-utils');
  * to customize this controller
  */
 
-
-
-function keyInObj(k, obj) {
-    return (k in obj) && (obj[k] != null) && (obj[k] !== '')
-}
-
-function handleError(ctx, error, status = 500, message = 'Internal Server Error') {
-    ctx.response.status = status;
-    console.log('Error Object:', error);
-    console.log('Message:', message);
-    let error_pack = {
-        status: status,
-        message: message
-    }
-    return error_pack;
-}
-
-function validateRequiredFields(fields, obj) {
-    let res = null;
-    fields.forEach(field => {
-        if (!keyInObj(field, obj)) {
-            console.log(field)
-            res = field
-        }
-    });
-    return res;
-}
-
-
 module.exports = {
 
-    /**
-     * Create a record.
-     *
-     * @return {Object}
-     */
+      /**
+   * Retrieve a deeply populated record.
+   *
+   * @return {Object}
+   */
 
-    async create(ctx) {
+  async getOneDeep(ctx) {
+    const { id } = ctx.params;
 
-        const required = ['route', 'startTime', 'type', 'hub']
-
-        const missingField = validateRequiredFields(required, ctx.request.body);
-        if (missingField != null) {
-            return handleError(ctx, null, 400, "Missing value for one or more required field(s). Missing field: " + missingField)
+    const entity = await strapi.services.template.findOne({ id }, {
+        path: 'route',
+        populate: [{
+            path: 'stops'
+        },
+        {
+            path: 'from'
+        },
+        {
+            path: 'to'
         }
-        let entity
-        try {
-            entity = await strapi.services.template.create(ctx.request.body);
-        } catch (error) {
-            if (error.name === 'ValidationError') {
-                console.log("Validaation error")
-                return handleError(ctx, null, 400, "Validation Error.")
-            }
-            throw(error)
-        }
-
-        return sanitizeEntity(entity, { model: strapi.models.template });
-    },
-
-    /**
-     * Retrieve a deeply populated record.
-     *
-     * @return {Object}
-     */
-
-    async getOneDeep(ctx) {
-        const { id } = ctx.params;
-
-        const entity = await strapi.services.template.findOne({ id }, {
-            path: 'route',
-            populate: [{
-                path: 'stops'
-            },
-            {
-                path: 'from'
-            },
-            {
-                path: 'to'
-            }
-            ]
-        });
-        return sanitizeEntity(entity, { model: strapi.models.template });
-    },
+        ]
+    });
+    return sanitizeEntity(entity, { model: strapi.models.template });
+  },
 
 
     /**
